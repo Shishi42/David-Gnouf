@@ -1,2 +1,2 @@
-# DavidNiouf
-A discord bot
+# David Niouf
+A discord bot.

@@ -12,7 +12,7 @@ const Play = require('./commands/play')
 
 client.on("ready", () => {
   console.log(`Connecté en tant que ${client.user.tag}!`);
-  //client.channels.cache.get(chan_dev).send('David est connecté.\nIncroyable du cul !');
+  client.channels.cache.get(chan_dev).send('David est connecté.\nIncroyable du cul !');
 
   client.user.setPresence({status : 'dnd', activity: { name: 'Jean-Claude coder.', type: 'WATCHING' }});
 

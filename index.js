@@ -2,7 +2,7 @@ require("dotenv").config()
 
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const {prefix, chandev} = require("./config.json");
+const {prefix, chan_dev} = require("./config.json");
 
 const Google = require('./commands/google')
 const Hentai = require('./commands/nhentai')

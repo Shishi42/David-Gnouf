@@ -13,7 +13,7 @@
   "dependencies": {
     "discord.js": "^12.2.0",
     "dotenv": "^8.2.0",
-    "node-opus": "^0.3.3"
+    "fs": "0.0.1-security"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

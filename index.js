@@ -1,38 +1,51 @@
-require("dotenv").config()
-
 const Discord = require("discord.js");
-const client = new Discord.Client();
-const {prefix, chan_dev} = require("./config.json");
+const bot = new Discord.Client();
+const config = require("./config.json");
 
-const Google = require('./commands/google')
-const Hentai = require('./commands/nhentai')
-const Say = require('./commands/say')
-const Ping = require('./commands/ping')
-const Play = require('./commands/play')
+const fs = require("fs")
+bot.commands = new Discord.Collection()
+bot.aliases = new Discord.Collection()
 
-client.on("ready", () => {
-  console.log(`Connecté en tant que ${client.user.tag}!`);
-  client.channels.cache.get(chan_dev).send('David est connecté.\nIncroyable du cul !');
+fs.readdir("./commands/", (err, files) => {
 
-  client.user.setPresence({status : 'dnd', activity: { name: 'Jean-Claude coder.', type: 'WATCHING' }});
+  if(err) console.log(err)
 
-})
+  let jsfile = files.filter(f => f.split(".").pop() === "js")
 
-client.on("message", message => {
-  if (message.author.bot) return;
-
-  if(message.content.startsWith(`${prefix}`)){
-    message.content = message.content.substr(1)
-
-    let commandUsed =
-    Google.parse(message, client) ||
-    Hentai.parse(message, client) ||
-    Say.parse(message, client) ||
-    Ping.parse(message, client) ||
-    Play.parse(message, client)
-
+  if(jsfile.length <= 0){
+    return console.log("[LOGS] ne trouve pas de commandes!");
   }
 
+  jsfile.forEach((f, i) => {
+    let pull = require(`./commands/${f}`)
+    bot.commands.set(pull.config.name, pull)
+    pull.config.aliases.forEach(alias => {
+      bot.aliases.set(alias, pull.config.name)
+    })
+  })
+
 })
 
-client.login(process.env.BOT_TOKEN);
+bot.on("ready", async () => {
+  console.log(`Connecté en tant que ${bot.user.tag}!`);
+  bot.channels.cache.get(config.chan_dev).send('David est connecté.\nIncroyable du cul !');
+
+  bot.user.setPresence({status : 'dnd', activity: { name: 'Jean-Claude coder.', type: 'WATCHING' }});
+
+})
+
+bot.on("message", async message => {
+  if (message.author.bot || message.channel.type === "dm") return;
+
+  let prefix = config.prefix
+  let messageArray = message.content.split(" ")
+  let cmd = messageArray[0]
+  let args = messageArray.slice(1)
+
+  let commandFile = bot.commands.get(cmd.slice(prefix.length)) || bot.commands.get(bot.aliases.get(cmd.slice(prefix.length)))
+  if(commandFile) commandFile.run(bot, message, args)
+
+
+})
+
+bot.login(config.token);

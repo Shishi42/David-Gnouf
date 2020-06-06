@@ -1,15 +1,13 @@
-const Command = require("./command")
+const Discord = require("discord.js")
+const config = require("../config.json");
 
-module.exports = class google extends Command{
+module.exports.run = async (bot, message, args) => {
+  message.channel.send('https://www.google.fr/search?q='+ args.join('+'))
+  message.delete()
+}
 
-    static match(message){
-      return message.content.startsWith('google')
-    }
+module.exports.config = {
+  name: "google",
+  aliases: ["google","gg","search"]
 
-    static action(message, client){
-      let args = message.content.split(' ')
-      args.shift()
-      message.channel.send('https://www.google.fr/search?q='+ args.join('+'))
-      message.delete()
-    }
 }

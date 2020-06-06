@@ -1,15 +1,13 @@
-const Command = require("./command")
+const Discord = require("discord.js")
+const config = require("../config.json");
 
-module.exports = class say extends Command{
+module.exports.run = async (bot, message, args) => {
+  message.channel.send(args.join(' '))
+  message.delete()
+}
 
-    static match(message){
-      return message.content.startsWith('say')
-    }
+module.exports.config = {
+  name: "say",
+  aliases: ["echo","tell"]
 
-    static action(message, client){
-      let args = message.content.split(' ')
-      args.shift()
-      message.channel.send(args.join(' '))
-      message.delete()
-    }
 }

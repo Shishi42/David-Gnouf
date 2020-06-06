@@ -1,12 +1,16 @@
-const Command = require("./command")
+const Discord = require("discord.js")
+const config = require("../config.json");
 
-module.exports = class ping extends Command{
+module.exports.run = async (bot, message, args) => {
 
-    static match(message){
-      return message.content.startsWith('ping')
-    }
+  message.channel.send("Pinging...").then(m => {
+    let ping = m.createdTimestamp - message.createdTimestamp
+    m.edit(`Ping du BOT : ${ping}, ping de l'API : ${Math.round(bot.ping)}`)
+  })
+}
 
-    static action(message, client){
-      message.channel.send('pong, '+ Math.round(client.ws.ping) + ' ms')
-    }
+module.exports.config = {
+  name: "ping",
+  aliases: []
+
 }

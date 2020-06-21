@@ -1,2 +1,2 @@
-# David Niouf
+# David Gnouf
 A discord bot.

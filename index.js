@@ -1,4 +1,6 @@
 const Discord = require("discord.js");
+const cron = require("cron");
+
 const bot = new Discord.Client();
 const config = require("./config.json");
 
@@ -45,7 +47,22 @@ bot.on("message", async message => {
   let commandFile = bot.commands.get(cmd.slice(prefix.length)) || bot.commands.get(bot.aliases.get(cmd.slice(prefix.length)))
   if(commandFile) commandFile.run(bot, message, args)
 
-
 })
+
+let job1 = new cron.CronJob('00 00 17 * * *', () => {
+  bot.channels.cache.get(config.chan_dev).send('******************\nUn nouveau jour se lève sur SD.\n******************\n.');
+});
+
+let job2 = new cron.CronJob('00 00 18 * * *', () => {
+  bot.channels.cache.get(config.chan_dev).send('******************\n<@243136558797029376> : Va reviser ton jap et ton code connard-man\n******************\n.');
+});
+
+let job3 = new cron.CronJob('00 55 1,4,11,15 * * *', () => {
+  bot.channels.cache.get(config.chan_dev).send('******************\n<@243136558797029376> : Il est temps de farmer.\n******************\n.');
+});
+
+job1.start()
+job2.start()
+job3.start()
 
 bot.login(config.token);

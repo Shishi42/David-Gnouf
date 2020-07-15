@@ -50,11 +50,11 @@ bot.on("message", async message => {
 })
 
 let job1 = new cron.CronJob('00 00 18 * * *', () => {
-  bot.channels.cache.get(config.chan_dev).send('------------------\n<@243136558797029376> : Va reviser ton jap et ton code connard-man\n------------------\n Il est 18h.');
+  bot.users.cache.get("243136558797029376").send("Va reviser ton jap et ton code connard-man");
 });
 
 let job2 = new cron.CronJob('00 55 1,4,11,15 * * *', () => {
-  bot.channels.cache.get(config.chan_dev).send('------------------\nIl est temps de farmer.\n------------------\n Le bonus est dans 5min.');
+  bot.users.cache.get("243136558797029376").send('Il est temps de farmer.\nLe bonus est dans 5min.');
 });
 
 job1.start()

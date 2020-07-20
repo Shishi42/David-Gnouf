@@ -72,6 +72,5 @@ let jobtemp = new cron.CronJob('00 55 1,4,11,15 * * *', () => {
 
 job1.start()
 job2.start()
-jobtemp.start()
 
 bot.login(config.token);

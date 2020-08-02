@@ -51,6 +51,7 @@ bot.on("message", async message => {
 
 let job1 = new cron.CronJob('00 00 18 * * *', () => {
   bot.users.cache.get("243136558797029376").send("Va reviser ton jap et ton code connard-man");
+  bot.users.cache.get("295219242091937792").send("Va dessiner connard-man");
 });
 
 let job2 = new cron.CronJob('00 00 17 * * *', () => {
@@ -64,6 +65,7 @@ let job2 = new cron.CronJob('00 00 17 * * *', () => {
   bot.users.cache.get("243136558797029376").send("- Spin the login roulette");
   bot.users.cache.get("243136558797029376").send("- Purchase something");
   bot.users.cache.get("243136558797029376").send("------------------------------");
+
 });
 
 let jobtemp = new cron.CronJob('00 55 1,4,11,15 * * *', () => {

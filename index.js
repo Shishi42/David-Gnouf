@@ -50,29 +50,21 @@ bot.on("message", async message => {
 })
 
 let job1 = new cron.CronJob('00 00 18 * * *', () => {
-  bot.users.cache.get("243136558797029376").send("Va reviser ton jap et ton code connard-man");
-  bot.users.cache.get("295219242091937792").send("Va dessiner connard-man");
+  bot.channels.cache.get(config.chan_dev).send("<@&750339448398675988> Va dessiner connard-man");
+  bot.channels.cache.get(config.chan_dev).send("<@&750339318270132274> Va reviser ton jap et ton code connard-man");
 });
 
-let job2 = new cron.CronJob('00 00 17 * * *', () => {
-  bot.users.cache.get("243136558797029376").send("Un nouveau jour se lève sur SD");
-  bot.users.cache.get("243136558797029376").send("Daily missions : ");
-  bot.users.cache.get("243136558797029376").send("- Score 5 goals");
-  bot.users.cache.get("243136558797029376").send("- Use 10 hissatsu");
-  bot.users.cache.get("243136558797029376").send("- Win twice");
-  bot.users.cache.get("243136558797029376").send("- Play once at Inabikari Center");
-  bot.users.cache.get("243136558797029376").send("- Send ball to friend");
-  bot.users.cache.get("243136558797029376").send("- Spin the login roulette");
-  bot.users.cache.get("243136558797029376").send("- Purchase something");
-  bot.users.cache.get("243136558797029376").send("------------------------------");
+let jobSD = new cron.CronJob('00 00 17 * * *', () => {
+  bot.channels.cache.get(config.chan_dev).send("<@&750339318270132274> Un nouveau jour se lève sur SD");
 
 });
 
-let jobtemp = new cron.CronJob('00 55 1,4,11,15 * * *', () => {
-  bot.users.cache.get("243136558797029376").send('Il est temps de farmer.\nLe bonus est dans 5min.');
+let jobSDRanking = new cron.CronJob('00 55 1,4,11,15 * * *', () => {
+  bot.channels.cache.get(config.chan_dev).send("<@&750339318270132274> Il est temps de farmer.\nLe bonus est dans 5min.");
 });
 
 job1.start()
-job2.start()
+jobSD.start()
+jobSDRanking.start()
 
 bot.login(config.token);

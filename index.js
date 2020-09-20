@@ -4,7 +4,7 @@ const cron = require("cron");
 const bot = new Discord.Client();
 const config = require("./config.json");
 
-const fs = require("fs")
+const fs = require("fs");
 bot.commands = new Discord.Collection()
 bot.aliases = new Discord.Collection()
 

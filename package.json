@@ -2,7 +2,7 @@
   "name": "David_Gnouf",
   "version": "1.3.0",
   "description": "Discord BOT for Pegasus Inazuma",
-  "main": "index.js",
+  "main": "david.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Shishi42/David_Gnouf.git"

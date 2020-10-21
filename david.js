@@ -64,7 +64,7 @@ let jobSDRanking = new cron.CronJob('00 55 1,4,11,15 * * *', () => {
 });
 
 job1.start()
-jobSD.start()
+//jobSD.start()
 //jobSDRanking.start()
 
 bot.login(config.token);

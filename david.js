@@ -49,22 +49,12 @@ bot.on("message", async message => {
 
 })
 
-let job1 = new cron.CronJob('00 00 18 * * *', () => {
-  bot.channels.cache.get(config.chan_dev).send("<@&750339448398675988> Va dessiner connard-man");
-  bot.channels.cache.get(config.chan_dev).send("<@&750339318270132274> Va reviser ton jap et ton code connard-man");
+let job = new cron.CronJob('00 00 18 * * *', () => {
+  bot.channels.cache.get(config.chan_dev).send("<@&750339448398675988> ~~Va dessiner connard-man~~ Ferme ce jeu (ou lève toi) et va reviser");
+  bot.channels.cache.get(config.chan_dev).send("<@&750339318270132274> ~~Va reviser ton jap et ton code connard-man~~ Ferme Twitter et va reviser");
 });
 
-let jobSD = new cron.CronJob('00 00 17 * * *', () => {
-  bot.channels.cache.get(config.chan_dev).send("<@&750339318270132274> Un nouveau jour se lève sur SD");
+job.start()
 
-});
-
-let jobSDRanking = new cron.CronJob('00 55 1,4,11,15 * * *', () => {
-  bot.channels.cache.get(config.chan_dev).send("<@&750339318270132274> Il est temps de farmer.\nLe bonus est dans 5min.");
-});
-
-job1.start()
-//jobSD.start()
-//jobSDRanking.start()
 
 bot.login(config.token);

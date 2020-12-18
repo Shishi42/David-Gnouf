@@ -50,8 +50,8 @@ bot.on("message", async message => {
 })
 
 let job = new cron.CronJob('00 00 18 * * *', () => {
-  bot.channels.cache.get(config.chan_dev).send("<@&750339448398675988> Va revis... ah bah nan, va dessiner connard-man");
-  bot.channels.cache.get(config.chan_dev).send("<@&750339318270132274> Va revis... ah bah nan, va trouver un stage et reviser ton jap + ton code connard-man");
+  bot.channels.cache.get(config.chan_dev).send("<@&750339448398675988> Va revis... ah bah nan, tu peux lancer Cyberpunk connard-man");
+  bot.channels.cache.get(config.chan_dev).send("<@&750339318270132274> Va revis... ah bah nan tu peux lancer cyberpunk connard-man");
 });
 
 job.start()

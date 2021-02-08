@@ -11,8 +11,6 @@ module.exports.run = async (bot, message, args) => {
   }
 
   str = JSON.stringify(eventjson, null, "  ");
-  console.log(str)
-
   message.channel.send("Liste des event : \n"+str)
   message.delete()
 }

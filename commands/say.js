@@ -2,7 +2,9 @@ const Discord = require("discord.js")
 const config = require("../config.json");
 
 module.exports.run = async (bot, message, args) => {
-  message.channel.send(args.join(' '))
+  if(args.length != 0){
+    message.channel.send(args.join(' '))
+  }
   message.delete()
 }
 

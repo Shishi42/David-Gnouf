@@ -12,6 +12,7 @@ module.exports.run = async (bot, message, args) => {
     
   if(bot.eventjson[date] === undefined) bot.eventjson[date] = new Array()
   bot.eventjson[date].push(msg)
+  fs.unlink("./event.json", function(err) {})
   fs.writeFile("./event.json", JSON.stringify(bot.eventjson, null, 4), function(err) {})
    
   args_str = args.slice(1).join(" ")

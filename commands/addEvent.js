@@ -6,7 +6,7 @@ module.exports.run = async (bot, message, args) => {
   let messageArray = message.content.split(" ")
     
   date = messageArray[1]
-  message = args.slice(1).join(' ')
+  msg = args.slice(1).join(' ')
     
   if(bot.eventjson[date] === undefined) bot.eventjson[date] = new Array()
   bot.eventjson[date].push(msg)

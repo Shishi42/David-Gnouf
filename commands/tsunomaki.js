@@ -1,5 +1,5 @@
 const Discord = require("discord.js")
-const config = require("../config.json");
+const config = require("../config.json")
 
 module.exports.run = async (bot, message, args) => {
 
@@ -10,11 +10,11 @@ module.exports.run = async (bot, message, args) => {
   message.delete()
 
   function sleep(ms) {
-   return new Promise(resolve => setTimeout(resolve, ms));
+   return new Promise(resolve => setTimeout(resolve, ms))
   }
 
   function randomChoice(){
-    return Math.floor(Math.random() * Math.floor(3));
+    return Math.floor(Math.random() * Math.floor(3))
   }
 
   async function editmsg(m, str, t){
@@ -45,6 +45,8 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.config = {
   name: "tsunomaki",
-  aliases: ["tsu","tnmk","janken"]
-
+  aliases: ["tsu","tnmk","janken"],
+  args: [],
+  usage: ["tsunomaki"],
+  desc: "Play the Tsunomaki Janken."
 }

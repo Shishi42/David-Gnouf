@@ -8,6 +8,6 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.config = {
   name: "google",
-  aliases: ["google","gg","search"]
+  aliases: ["gg","search"]
 
 }

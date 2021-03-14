@@ -5,8 +5,7 @@ module.exports.run = async (bot, message, args) => {
   if(args[1]){
     message.channel.send('Un seul à la fois. <:kappacr:700442157256802436>')
     return
-  }
-  
+  }  
   message.channel.send('https://www.nhentai.net/g/'+ args[0])
 }
 

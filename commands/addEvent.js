@@ -9,5 +9,8 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.config = {
   name: "addEvent",
-  aliases: ["adev"]
+  aliases: ["adev"],
+  args: [],
+  usage: ["addEvent"],
+  desc: "Add an event to the list."
 }

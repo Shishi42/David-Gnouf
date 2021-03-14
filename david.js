@@ -68,9 +68,11 @@ let jobdate = new cron.CronJob('00 00 00 * * *', () => {
 function checkEvent(){
   var date = new Date();
   datestr = date.getDate().toString()+"/"+(date.getMonth()+1).toString()
-  for (var i = 0; i < bot.eventjson[datestr].length; i++) {
-    bot.channels.cache.get("295252502679650315").send("<@&474513550992211979> "+bot.eventjson[datestr][i]);
-  }
+  if(bot.eventjson[date] != undefined){
+    for (var i = 0; i < bot.eventjson[datestr].length; i++) {
+      bot.channels.cache.get("295252502679650315").send("<@&474513550992211979> "+bot.eventjson[datestr][i]);
+    }
+  }  
 }
 
 job.start()

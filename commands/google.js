@@ -1,5 +1,5 @@
 const Discord = require("discord.js")
-const config = require("../config.json");
+const config = require("../config.json")
 
 module.exports.run = async (bot, message, args) => {
   message.channel.send('https://www.google.fr/search?q='+ args.join('+'))
@@ -8,6 +8,8 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.config = {
   name: "google",
-  aliases: ["gg","search"]
-
+  aliases: ["google","gg","search"],
+  args: ["<search>"],
+  usage: ["google <search>"],
+  desc: "Send google link with your search."
 }

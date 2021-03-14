@@ -1,5 +1,5 @@
 const Discord = require("discord.js")
-const config = require("../config.json");
+const config = require("../config.json")
 
 module.exports.run = async (bot, message, args) => {
   if(args[1]){
@@ -12,6 +12,8 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.config = {
   name: "nhentai",
-  aliases: ["hentai","n"]
-
+  aliases: ["hentai","n"],
+  args: ["<magic_number>"],
+  usage: ["nhentai <magic_number>"],
+  desc: "Send nhentai link with your magic number."
 }

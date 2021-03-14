@@ -17,5 +17,8 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.config = {
   name: "listEvent",
-  aliases: ["lev"]
+  aliases: ["lev"],
+  args: [],
+  usage: ["listEvent"],
+  desc: "Display events."
 }

@@ -1,16 +1,18 @@
 const Discord = require("discord.js")
-const config = require("../config.json");
+const config = require("../config.json")
 
 module.exports.run = async (bot, message, args) => {
 
   message.channel.send("Pinging...").then(m => {
     let ping = m.createdTimestamp - message.createdTimestamp
-    m.edit(`Ping du BOT : ${ping}, ping de l'API : ${Math.round(bot.ws.ping)}`)
+    m.edit(`BOT ping : ${ping}, API ping : ${Math.round(bot.ws.ping)}`)
   })
 }
 
 module.exports.config = {
   name: "ping",
-  aliases: []
-
+  aliases: ["pg","p"],
+  args: [],
+  usage: ["ping"],
+  desc: "Send bot and API ping in a message."
 }

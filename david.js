@@ -1,19 +1,18 @@
-const Discord = require("discord.js");
-const cron = require("cron");
+const Discord = require("discord.js")
+const config = require("./config.json")
 
-const bot = new Discord.Client();
-const config = require("./config.json");
+const bot = new Discord.Client()
 
+const cron = require("cron")
 const jsonfile = require ("jsonfile")
+const fs = require("fs")
 
-const fs = require("fs");
 bot.commands = new Discord.Collection()
 bot.aliases = new Discord.Collection()
-
-var eventjson = {}
+bot.eventjson = {}
 
 if(fs.existsSync("./event.json")){
-  eventjson = jsonfile.readFileSync("./event.json")
+  bot.eventjson = jsonfile.readFileSync("./event.json")
 }
 
 fs.readdir("./commands/", (err, files) => {
@@ -25,8 +24,10 @@ fs.readdir("./commands/", (err, files) => {
   if(jsfile.length <= 0){
     return console.log("[LOGS] ne trouve pas de commandes!");
   }
-
+  
+  //console.log("[LOGS] commandes trouvées :")
   jsfile.forEach((f, i) => {
+    //console.log(f)
     let pull = require(`./commands/${f}`)
     bot.commands.set(pull.config.name, pull)
     pull.config.aliases.forEach(alias => {
@@ -53,40 +54,26 @@ bot.on("message", async message => {
 
   let commandFile = bot.commands.get(cmd.slice(prefix.length)) || bot.commands.get(bot.aliases.get(cmd.slice(prefix.length)))
   if(commandFile) commandFile.run(bot, message, args)
-
-  if(messageArray[0] === "$addEvent"){
-    addEvent(messageArray[1], args.slice(1).join(' '))
-  }
 })
 
 let job = new cron.CronJob('00 00 18 * * *', () => {
   bot.channels.cache.get(config.chan_dev).send("<@&750339448398675988> Va revis... ah bah nan, va dessiner connard-man");
-  bot.channels.cache.get(config.chan_dev).send("<@&750339318270132274> Va revis... ah bah nan, va trouver un stage et reviser ton jap + ton code connard-man");
+  bot.channels.cache.get(config.chan_dev).send("<@&750339318270132274> Va revis... ah bah nan, va reviser ton jap + ton code connard-man");
 });
 
 let jobdate = new cron.CronJob('00 00 00 * * *', () => {
   checkEvent()
 });
 
-
 function checkEvent(){
   var date = new Date();
-
   datestr = date.getDate().toString()+"/"+(date.getMonth()+1).toString()
-
-  for (var i = 0; i < eventjson[datestr].length; i++) {
-    bot.channels.cache.get("295252502679650315").send("<@&474513550992211979> "+eventjson[datestr][i]);
+  for (var i = 0; i < bot.eventjson[datestr].length; i++) {
+    bot.channels.cache.get("295252502679650315").send("<@&474513550992211979> "+bot.eventjson[datestr][i]);
   }
-}
-
-function addEvent(date, msg){
-  if(eventjson[date] === undefined) eventjson[date] = new Array()
-  eventjson[date].push(msg)
-  fs.writeFile("./event.json", JSON.stringify(eventjson, null, 4), function(err) {})
 }
 
 job.start()
 jobdate.start()
-
 
 bot.login(config.token);

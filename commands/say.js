@@ -5,13 +5,13 @@ module.exports.run = async (bot, message, args) => {
   if(args.length != 0){
     message.channel.send(args.join(' '))
   }
-  message.delete()
+  return message.delete()
 }
 
 module.exports.config = {
   name: "say",
   aliases: ["echo","tell","print"],
-  args: [],
+  args: ["<message>"],
   usage: ["say <message>"],
   desc: "Resend the specified message and delete the original."
 }

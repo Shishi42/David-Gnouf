@@ -4,7 +4,6 @@ const config = require("../config.json")
 module.exports.run = async (bot, message, args) => {
   if(args.length != 0){
     message.channel.send(args.join(' '))
-    console.log(args.join(' '))
   }
   return message.delete()
 }

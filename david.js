@@ -57,8 +57,8 @@ bot.on("message", async message => {
 })
 
 let job = new cron.CronJob('00 00 18 * * *', () => {
-  bot.channels.cache.get(config.chan_dev).send("<@&750339448398675988> Va revis... ah bah nan, va dessiner connard-man");
-  bot.channels.cache.get(config.chan_dev).send("<@&750339318270132274> ne dors pas et revise le code et Duolingo");
+  bot.channels.cache.get(config.chan_dev).send("<@&750339448398675988> Va revis... ah bah nan, va dessiner et fait tes devoirs");
+  bot.channels.cache.get(config.chan_dev).send("<@&750339318270132274> Révise Duolingo + Kanji, passe l'aspi, brosse le chat et joue à Genshin");
 });
 
 let jobdate = new cron.CronJob('00 00 00 * * *', () => {

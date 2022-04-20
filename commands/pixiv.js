@@ -7,6 +7,8 @@ module.exports.run = async (bot, message, args) => {
     if(arg.startsWith("u")) message.channel.send("https://www.pixiv.net/en/users/"+arg.split("u")[1])
     else message.channel.send("https://www.pixiv.net/en/artworks/"+arg)
   })
+
+  return message.delete()
 }
 
 module.exports.config = {

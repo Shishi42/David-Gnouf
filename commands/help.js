@@ -55,6 +55,7 @@ module.exports = {
       .setThumbnail(bot.user.displayAvatarURL({dynamic: true}))
       .setDescription(`Name : \`${command.name}\` \nDescription : \`${command.description}\` \nRequired permissions : \`${typeof command.permission !== "bigint" ? command.permission !== null ? command.permission : "Any" : new Discord.PermissionsBitField(command.permission).toArray(false)}\` \nCommand in DM : \`${command.dm ? "Yes" : "No"}\` \nCategory : \`${command.category}\``)
       .setTimestamp()
+      .setFooter({text: 'a BOT by @shishi4272', iconURL: 'https://www.iconpacks.net/icons/2/free-twitter-logo-icon-2429-thumb.png'})
 
       await message.reply({embeds: [embed]})
     }

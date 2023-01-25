@@ -3,7 +3,7 @@ const Discord = require("discord.js")
 module.exports = {
 
   name: "wah",
-  description: "Provides a wah",
+  description: "Provide a wah",
   permission: null,
   dm: true,
   category: "Simp",

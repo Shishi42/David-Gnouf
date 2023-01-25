@@ -3,7 +3,7 @@ const Discord = require("discord.js")
 module.exports = {
 
   name: "takohype",
-  description: "Provides a tako hype",
+  description: "Provide a tako hype",
   permission: null,
   dm: true,
   category: "Simp",

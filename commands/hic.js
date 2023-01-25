@@ -3,7 +3,7 @@ const Discord = require("discord.js")
 module.exports = {
 
   name: "hic",
-  description: "Provides a hic",
+  description: "Provide an hic",
   permission: null,
   dm: true,
   category: "Simp",

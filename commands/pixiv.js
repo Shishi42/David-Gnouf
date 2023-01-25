@@ -1,31 +1,39 @@
 const Discord = require("discord.js")
-const config = require("../config.json")
 
-module.exports.run = async (bot, message, args) => {
+module.exports = {
 
-  msg = ""
+  name: "pixiv",
+  description: "Send pixiv artwork or user link with your ids",
+  permission: null,
+  dm: true,
+  category: "Utility",
+  options: [
+    {
+      type: "string",
+      name: "ids",
+      description: "The ids to search",
+      required: true,
+      autocomplete: false,
+    }
+  ],
 
-  args.forEach((arg) => {
+  async run(bot, message, args) {
 
-    if(arg.startsWith("u")) res = "https://www.pixiv.net/en/users/"+arg.split("u")[1]+"\n"
-    else res = "https://www.pixiv.net/en/artworks/"+arg+"\n"
+    await message.deferReply()
 
-    if (res.length + msg.length >= 2000){
-      message.channel.send(msg)
-      msg = ""
+    msg = ""
+
+    for(id of args.get("ids").value.split(' ')){
+      if(id.startsWith("u")) res = "https://www.pixiv.net/en/users/"+id.split("u")[1]+"\n"
+      else res = "https://www.pixiv.net/en/artworks/"+id+"\n"
+
+      if(res.length + msg.length >= 2000){
+        await message.followUp(msg)
+        msg = ""
+      }
+      msg += res
     }
 
-    msg += res
-  })
-
-  message.channel.send(msg)
-  return message.delete()
-}
-
-module.exports.config = {
-  name: "pixiv",
-  aliases: ["pix","p"],
-  args: ["[artwork_id OR u<user_id>]"],
-  usage: ["pixiv [artwork_id OR u<user_id>]"],
-  desc: "Send pixiv artwork or user link with your ids."
+    await message.followUp(msg)
+  }
 }

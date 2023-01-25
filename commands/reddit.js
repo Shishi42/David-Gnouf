@@ -1,15 +1,23 @@
 const Discord = require("discord.js")
-const config = require("../config.json")
 
-module.exports.run = async (bot, message, args) => {
-  message.channel.send('https://redd.it/'+ args[0].split('/')[6])
-  return message.delete()
-}
+module.exports = {
 
-module.exports.config = {
   name: "reddit",
-  aliases: ["r","short","sr"],
-  args: ["<link>"],
-  usage: ["reddit <link>"],
-  desc: "Shorten reddit input link and send result."
+  description: "Send beautified reddit post link",
+  permission: null,
+  dm: true,
+  category: "Utility",
+  options: [
+    {
+      type: "string",
+      name: "link",
+      description: "The link to beautify",
+      required: true,
+      autocomplete: false,
+    }
+  ],
+
+  async run(bot, message, args) {
+    await message.reply('https://redd.it/'+args.get("link").value.split('/')[6])
+  }
 }

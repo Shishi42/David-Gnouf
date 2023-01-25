@@ -1,31 +1,29 @@
 const Discord = require("discord.js")
-const config = require("../config.json")
 
-module.exports.run = async (bot, message, args) => {
+module.exports = {
 
-  msg = ""
+  name: "twitter",
+  description: "Send beautified twitter links",
+  permission: null,
+  dm: true,
+  category: "Utility",
+  options: [
+    {
+      type: "string",
+      name: "end_link",
+      description: "The links to beautified",
+      required: true,
+      autocomplete: false,
+    }
+  ],
 
-  args.forEach((arg) => {
+  async run(bot, message, args) {
 
-    res = "https://twitter.com/"+arg+"\n"
-
-
-    if (res.length + msg.length >= 2000){
-      message.channel.send(msg)
-      msg = ""
+    msg = ""
+    for(link of args.get("end_link").value.split(' ')){
+      msg += "https://twitter.com/"+link+"\n"
     }
 
-    msg += res
-  })
-
-  message.channel.send(msg)
-  return message.delete()
-}
-
-module.exports.config = {
-  name: "twitter",
-  aliases: ["tw","t"],
-  args: ["<end_of_link>"],
-  usage: ["twitter <end_of_link>"],
-  desc: "Send beautified twitter link."
+    await message.reply(msg)
+  }
 }

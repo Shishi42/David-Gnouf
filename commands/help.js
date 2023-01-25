@@ -38,6 +38,7 @@ module.exports = {
       .setThumbnail(bot.user.displayAvatarURL({dynamic: true}))
       .setDescription(`Available commands : \`${bot.commands.size}\` \nAvailable categories : \`${categories.length}\``)
       .setTimestamp()
+      .setFooter({text: 'a BOT by @shishi4272', iconURL: 'https://www.iconpacks.net/icons/2/free-twitter-logo-icon-2429-thumb.png'})
 
       await categories.sort().forEach(async cat => {
         let commands = bot.commands.filter(cmd => cmd.category === cat)

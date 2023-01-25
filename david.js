@@ -22,7 +22,7 @@ bot.on("ready", async () => {
 
   await slashcommands_loader(bot)
 
-  bot.user.setPresence({status : 'dnd', activity: { name: 'Jean-Claude coder.', type: 3 }})
+  bot.user.setPresence({activities: [{ name: "Jean-Claude coder", type: 3 }], status: 'dnd'})
 })
 
 bot.on("messageCreate", async message => {

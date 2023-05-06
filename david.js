@@ -26,14 +26,65 @@ bot.on("ready", async () => {
 })
 
 bot.on("messageCreate", async message => {
-  if(message.author.bot || message.channel.type === "dm" || !message.content.startsWith("!say")) return
 
-  let args = message.content.split(" ").slice(1)
+  if(message.author.bot || message.channel.type === "dm") return
 
-  if(args.length != 0){
-    message.channel.send(args.join(' '))
+  // prepix code
+  if(message.channel.id == config.chan_prepix){
+    if (message.content.includes("SauceNAO")){
+
+      if(message.content.includes("&illust_id")){
+        res = message.content.split("&illust_id=")[1].split(")")[0]
+        bot.channels.cache.get(config.chan_artworks).messages.fetch()
+          .then(messages => messages.filter(m => m.author.id === bot.user.id).first().edit(messages.filter(m => m.author.id === bot.user.id).first().content + '\n' + res))
+          .catch((error) => {
+            bot.channels.cache.get(config.chan_artworks).send(res)
+          })
+      } else if (message.content.includes("member.php&id")){
+        res = message.content.split("member.php&id=")[1].split(")")[0]
+        bot.channels.cache.get(config.chan_users).messages.fetch()
+          .then(messages => messages.filter(m => m.author.id === bot.user.id).first().edit(messages.filter(m => m.author.id === bot.user.id).first().content + '\n' + res))
+          .catch((error) => {
+            bot.channels.cache.get(config.chan_users).send(res)
+          })
+      }
+    }
+    else if(message.content.includes("twitter")) {
+      res = message.content.split("https://twitter.com/")[1].split("?")[0]
+      bot.channels.cache.get(config.chan_sort).messages.fetch()
+        .then(messages => messages.filter(m => m.author.id === bot.user.id).first().edit(messages.filter(m => m.author.id === bot.user.id).first().content + '\n' + res))
+        .catch((error) => {
+          bot.channels.cache.get(config.chan_sort).send(res)
+        })
+    }
+    else if (message.content.includes("users")){
+      res = message.content.split("users/")[1]
+      bot.channels.cache.get(config.chan_users).messages.fetch()
+        .then(messages => messages.filter(m => m.author.id === bot.user.id).first().edit(messages.filter(m => m.author.id === bot.user.id).first().content + '\n' + res))
+        .catch((error) => {
+          bot.channels.cache.get(config.chan_users).send(res)
+        })
+    }
+    else if (message.content.includes("artworks")){
+      res = message.content.split("artworks/")[1]
+      bot.channels.cache.get(config.chan_artworks).messages.fetch()
+        .then(messages => messages.filter(m => m.author.id === bot.user.id).first().edit(messages.filter(m => m.author.id === bot.user.id).first().content + '\n' + res))
+        .catch((error) => {
+          bot.channels.cache.get(config.chan_artworks).send(res)
+        })
+    }
+    return message.delete()
   }
-  return message.delete()
+
+  // say command code
+  if(message.content.startsWith("!say")){
+    let args = message.content.split(" ").slice(1)
+
+    if(args.length != 0){
+      message.channel.send(args.join(' '))
+    }
+    return message.delete()
+  }
 })
 
 bot.on("interactionCreate", async interaction => {

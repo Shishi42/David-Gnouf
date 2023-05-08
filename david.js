@@ -53,7 +53,7 @@ bot.on("messageCreate", async message => {
         return message.delete()
       }
     } else if(message.content.includes("twitter")) {
-      res = message.content.split("https://twitter.com/")[1].split("?")[0]
+      res = message.content.split("https://twitter.com/")[1].split("?")[0].split(")")[0]
       bot.channels.fetch(config.chan_sort)
         .then(chan => chan.messages.fetch()
           .then(messages => messages.filter(m => m.author.id === bot.user.id).first().edit(messages.filter(m => m.author.id === bot.user.id).first().content + '\n' + res))
@@ -62,7 +62,7 @@ bot.on("messageCreate", async message => {
           }))
       return message.delete()
     } else if (message.content.includes("artworks")){
-      res = message.content.split("artworks/")[1]
+      res = message.content.split("artworks/")[1].split(")")[0]
       bot.channels.fetch(config.chan_artworks)
         .then(chan => chan.messages.fetch()
           .then(messages => messages.filter(m => m.author.id === bot.user.id).first().edit(messages.filter(m => m.author.id === bot.user.id).first().content + '\n' + res))
@@ -71,7 +71,7 @@ bot.on("messageCreate", async message => {
           }))
       return message.delete()
     } else if (message.content.includes("users")){
-      res = message.content.split("users/")[1]
+      res = message.content.split("users/")[1].split(")")[0]
       bot.channels.fetch(config.chan_users)
         .then(chan => chan.messages.fetch()
           .then(messages => messages.filter(m => m.author.id === bot.user.id).first().edit(messages.filter(m => m.author.id === bot.user.id).first().content + '\n' + res))

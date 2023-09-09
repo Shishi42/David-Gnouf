@@ -52,8 +52,8 @@ bot.on("messageCreate", async message => {
             }))
         return message.delete()
       }
-    } else if(message.content.includes("twitter")) {
-      res = message.content.split("https://twitter.com/")[1].split("?")[0].split(")")[0]
+    } else if(message.content.includes("twitter") || message.content.includes("x.com")) {
+      res = message.content.split(".com/")[1].split("?")[0].split(")")[0]
       bot.channels.fetch(config.chan_sort)
         .then(chan => chan.messages.fetch()
           .then(messages => messages.filter(m => m.author.id === bot.user.id).first().edit(messages.filter(m => m.author.id === bot.user.id).first().content + '\n' + res))

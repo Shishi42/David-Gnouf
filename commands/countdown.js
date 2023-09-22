@@ -4,7 +4,7 @@ const { joinVoiceChannel, createAudioPlayer, createAudioResource } = require("@d
 module.exports = {
 
   name: "countdown",
-  description: "Provide a text and play a 5sec on voice channel countdown",
+  description: "Provide a 5sec countdown on your voice channel ",
   permission: null,
   dm: true,
   category: "Utility",

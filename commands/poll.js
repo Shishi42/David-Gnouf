@@ -2,7 +2,7 @@ const Discord = require("discord.js")
 
 module.exports = {
 
-  name: "Poll",
+  name: "poll",
   description: "React to a message with poll emoji",
   permission: null,
   dm: true,
@@ -21,6 +21,7 @@ module.exports = {
     
     message.channel.messages.fetch(args.get("id").value)
       .then(message => message.react("<:check:334046325098414080>"); message.react(":grey_question:")); message.react(":x:")))
+      .catch((error) => {message.reply("Message not found with this id.")})
     return message.delete()
   }
 }

@@ -19,7 +19,7 @@ module.exports = {
 
   async run(bot, message, args) {
 
-    await message.deferReply({ephemeral: true})
+    await message.reply({content: "Done.", ephemeral: true})
    
     message.channel.messages.fetch(args.get("id").value)
       .then(function(msg){
@@ -27,6 +27,5 @@ module.exports = {
         msg.react("❔")
         msg.react("❌")})
       .catch((error) => {console.log(error)})
-    return await message.editReply({content: "Done.", ephemeral: true})
   }
 }

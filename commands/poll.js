@@ -19,7 +19,7 @@ module.exports = {
 
   async run(bot, message, args) {
 
-    message.deferReply({ephemeral: true})
+    await message.deferReply({ephemeral: true})
    
     message.channel.messages.fetch(args.get("id").value)
       .then(function(msg){

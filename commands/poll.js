@@ -18,11 +18,12 @@ module.exports = {
   ],
 
   async run(bot, message, args) {
-    
+   
     message.channel.messages.fetch(args.get("id").value)
-      .then(message => message.react("<:check:334046325098414080>"))
-      .then(message => message.react(":grey_question:"))
-      .then(message => message.react(":x:"))
+      .then(function(message){
+        message.react("<:check:334046325098414080>")
+        message.react(":grey_question:")
+        message.react(":x:")})
       .catch((error) => {message.reply("Message not found with this id.")})
     return message.delete()
   }

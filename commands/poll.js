@@ -27,6 +27,6 @@ module.exports = {
         msg.react("❔")
         msg.react("❌")})
       .catch((error) => {console.log(error)})
-    return message.editReply({content: "Done.", ephemeral: true})
+    return await message.editReply({content: "Done.", ephemeral: true})
   }
 }

@@ -24,7 +24,7 @@ module.exports = {
         msg.react("<:check:334046325098414080>")
         msg.react("❔")
         msg.react("❌")})
-      .catch((error) => {message.reply("Message not found with this id.")})
-    // return message.delete()
+      // .catch((error) => {message.reply("Message not found with this id.")})
+    return await message.delete()
   }
 }

@@ -21,9 +21,9 @@ module.exports = {
    
     message.channel.messages.fetch(args.get("id").value)
       .then(function(msg){
-        await msg.react("<:check:334046325098414080>")
-        await msg.react("❔")
-        await msg.react("❌")})
+        msg.react("<:check:334046325098414080>")
+        msg.react("❔")
+        msg.react("❌")})
       // .catch((error) => {message.reply("Message not found with this id.")})
   }
 }

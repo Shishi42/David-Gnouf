@@ -19,13 +19,15 @@ module.exports = {
 
   async run(bot, message, args) {
 
-    await message.reply({content: "Done.", ephemeral: true})
+    await message.reply({content: "Reacting..", ephemeral: true})
    
     message.channel.messages.fetch(args.get("id").value)
       .then(function(msg){
         msg.react("<:check:334046325098414080>")
         msg.react("❔")
         msg.react("❌")})
-      .catch((error) => {console.log(error)})
+      .catch((error) => {return message.editReply({content: "Message with this id not found.", ephemeral: true}))
+
+    await message.editReply({content: "Done.", ephemeral: true})
   }
 }

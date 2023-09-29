@@ -25,6 +25,5 @@ module.exports = {
         await msg.react("❔")
         await msg.react("❌")})
       // .catch((error) => {message.reply("Message not found with this id.")})
-    return message.delete()
   }
 }

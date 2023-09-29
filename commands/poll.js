@@ -18,6 +18,8 @@ module.exports = {
   ],
 
   async run(bot, message, args) {
+
+    message.deferReply({ephemeral: true})
    
     message.channel.messages.fetch(args.get("id").value)
       .then(function(msg){
@@ -25,6 +27,6 @@ module.exports = {
         msg.react("❔")
         msg.react("❌")})
       // .catch((error) => {message.reply("Message not found with this id.")})
-    return await message.reply({content: "Done.", ephemeral: true})
+    return await message.editReply({content: "Done.", ephemeral: true})
   }
 }

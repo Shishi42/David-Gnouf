@@ -26,7 +26,7 @@ module.exports = {
         msg.react("<:check:334046325098414080>")
         msg.react("❔")
         msg.react("❌")})
-      .catch((error) => {return message.editReply({content: "Message with this id not found.", ephemeral: true}))
+      .catch((error) => {return message.editReply({content: "Message with this id not found.", ephemeral: true})})
 
     await message.editReply({content: "Done.", ephemeral: true})
   }

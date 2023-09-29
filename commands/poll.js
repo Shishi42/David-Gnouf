@@ -25,5 +25,6 @@ module.exports = {
         msg.react("❔")
         msg.react("❌")})
       // .catch((error) => {message.reply("Message not found with this id.")})
+    return await message.reply({content: "Done.", ephemeral: true})
   }
 }

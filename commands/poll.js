@@ -25,6 +25,6 @@ module.exports = {
         msg.react(":grey_question:")
         msg.react(":x:")})
       .catch((error) => {message.reply("Message not found with this id.")})
-    return message.delete()
+    // return message.delete()
   }
 }

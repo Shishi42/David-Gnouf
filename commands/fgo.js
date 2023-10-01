@@ -29,6 +29,6 @@ module.exports = {
     quartz = parseInt(args.get("quartz").value) + (parseInt(args.get("ticket").value)*3)
     total = parseInt((quartz/30)*11) + parseInt((quartz%30)/3)
 
-    return await message.reply({content: `You can do **${total} summons** (**${(total/330*100).toFixed(2)}%** of the pity) :right_arrow: **${(total*0.8).toFixed(2)}%** theoretical chance to get the featured 5*.`, ephemeral: true})
+    return await message.reply({content: `You can do **${total} summons** (**${(total/330*100).toFixed(2)}%** of the pity) ➡️ **${(total*0.8).toFixed(2)}%** theoretical chance to get the featured 5⭐.`, ephemeral: true})
   }
 }

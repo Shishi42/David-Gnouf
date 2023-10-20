@@ -35,7 +35,7 @@ bot.on("messageCreate", async message => {
 
   // prepix code
   if(message.channel.id == config.chan_prepix){
-    
+
     if (message.content.includes("SauceNAO")){
       if(message.content.includes("&illust_id")){
         res = message.content.split("&illust_id=")[1].split(")")[0]
@@ -116,7 +116,18 @@ bot.on("interactionCreate", async interaction => {
 })
 
 bot.player.events.on('playerStart', (queue, track) => {
-    queue.metadata.channel.send(`Started playing : **${track.title}**`)
+  embed = new Discord.EmbedBuilder()
+    .setColor(bot.color)
+    .setDescription(`Starting playing : **${track.title}**.`)
+    .addFields({name: "Author", value: `${track.author}`})
+    .addFields({name: "Duration", value: `${track.duration}`})
+    .addFields({name: "Views", value: `${track.views}`})
+    .setThumbnail(track.thumbnail)
+    .setTimestamp()
+    .setFooter({text: `Song requested by ${track.requestedBy.username}`, iconURL: `${track.requestedBy.displayAvatarURL({dynamic: true})}`})
+  if(track.playlist) embed.addFields({name: "Playlist", value: `${track.playlist.title}`})
+
+  queue.metadata.channel.send({ embeds: [embed] })
 })
 
 let event_job = new cron.CronJob('00 00 00 * * *', () => {

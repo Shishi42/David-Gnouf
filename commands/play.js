@@ -15,6 +15,13 @@ module.exports = {
       description: "Link to a YouTube video or playlist",
       required: true,
       autocomplete: false,
+    },
+    {
+      type: "string",
+      name: "shuffle",
+      description: "If you want the songs played in a random order",
+      required: false,
+      autocomplete: false,
     }
   ],
 
@@ -28,6 +35,8 @@ module.exports = {
     url = args.get("url").value
     if (!checkLink(url)) return message.editReply({content: "URL provided is invalid.", ephemeral: true})
 
+    let shuffle = args.get("shuffle") ? true : false
+
     const searchResult = await player.search(url, { requestedBy: message.user })
 
     if (!searchResult.hasTracks()) {
@@ -35,6 +44,7 @@ module.exports = {
       return
     } else {
       try {
+        if(shuffle) searchResult.tracks = searchResult.tracks.sort(() => Math.random() - 0.5)
         await player.play(channel, searchResult, { nodeOptions: { metadata: message } })
 
         let embed = new Discord.EmbedBuilder()

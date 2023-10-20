@@ -11,10 +11,14 @@
   "author": "Shishi",
   "license": "MIT",
   "dependencies": {
+    "@discord-player/extractor": "^4.4.4",
+    "@discordjs/opus": "^0.9.0",
     "@discordjs/voice": "^0.14.0",
     "cron": "^2.2.0",
+    "discord-player": "^6.6.4",
     "discord.js": "^14.7.1",
     "jsonfile": "^6.1.0",
-    "tweetnacl": "^1.0.3"
+    "tweetnacl": "^1.0.3",
+    "ytdl-core": "^4.11.5"
   }
 }

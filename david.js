@@ -8,6 +8,7 @@ const slashcommands_loader = require("./slashcommands_loader")
 const cron = require("cron")
 const jsonfile = require ("jsonfile")
 const fs = require("fs")
+const { Player } = require("discord-player")
 
 bot.commands = new Discord.Collection()
 bot.eventjson = {}
@@ -16,6 +17,9 @@ bot.color = "553380"
 if(fs.existsSync("./event.json")){
   bot.eventjson = jsonfile.readFileSync("./event.json")
 }
+
+bot.player = new Player(bot)
+bot.player.extractors.loadDefault()
 
 bot.on("ready", async () => {
   console.log(`Connecté en tant que ${bot.user.tag}!`)
@@ -109,6 +113,10 @@ bot.on("interactionCreate", async interaction => {
    let command = require(`./commands/${interaction.commandName}`)
    command.run(bot, interaction, interaction.options)
   }
+})
+
+bot.player.events.on('playerStart', (queue, track) => {
+    queue.metadata.channel.send(`Started playing : **${track.title}**`)
 })
 
 let event_job = new cron.CronJob('00 00 00 * * *', () => {

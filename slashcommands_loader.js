@@ -37,5 +37,5 @@ module.exports = async bot => {
 
 
   const data = await rest.put(Routes.applicationCommands(bot.user.id),{ body: commands },)
-  console.log(`Successfully reloaded ${data.length} application (/) commands.`);
+  console.log(`Successfully reloaded ${data.length} application (/) commands.`)
 }

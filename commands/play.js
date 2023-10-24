@@ -21,7 +21,7 @@ module.exports = {
       name: "shuffle",
       description: "If you want the songs played in a random order",
       required: false,
-      autocomplete: false,
+      autocomplete: true,
     }
   ],
 
@@ -35,7 +35,7 @@ module.exports = {
     url = args.get("url").value
     if (!checkLink(url)) return message.editReply({content: "URL provided is invalid.", ephemeral: true})
 
-    let shuffle = args.get("shuffle") ? true : false
+    let shuffle = (args.get("shuffle") && args.get("shuffle").value.toLowerCase() == "yes") ? true : false
 
     const searchResult = await player.search(url, { requestedBy: message.user })
 

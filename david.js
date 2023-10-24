@@ -107,6 +107,21 @@ bot.on("interactionCreate", async interaction => {
       let choices = bot.commands.filter(cmd => cmd.name.includes(entry))
       await interaction.respond(entry === "" ? bot.commands.map(cmd => ({name: cmd.name, value: cmd.name})) : choices.map(choice => ({name: choice.name, value: choice.name})))
     }
+    if(interaction.commandName === "shiren") {
+      let choices = ["d2","d4","d6","d8","d10","d12","d20","d100"]
+      let focusedValue = interaction.options.getFocused()
+		  let filtered = choices.filter(choice => choice.startsWith(focusedValue))
+		  await interaction.respond(filtered.map(choice => ({ name: choice, value: choice })))
+    }
+    if(interaction.commandName === "play") {
+      let choices
+      const focusedOption = interaction.options.getFocused(true)
+
+      if(focusedOption.name === "shuffle") choices = ["Yes", "No"]
+
+      let filtered = choices.filter(choice => choice.startsWith(focusedOption.value))
+      await interaction.respond(filtered.map(choice => ({ name: choice, value: choice })))
+    }
   }
 
   if(interaction.type === Discord.InteractionType.ApplicationCommand) {

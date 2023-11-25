@@ -166,7 +166,7 @@ bot.on("ready", async () => {
 
   if(!await bot.Pokemons.findOne()) await require("./db_load.js").run(bot)
 
-  console.log("Database Online !")
+  console.log("Database Online.")
 
   await slashcommands_loader(bot)
 
@@ -265,6 +265,39 @@ bot.on("interactionCreate", async interaction => {
 
       let filtered = choices.filter(choice => choice.startsWith(focusedOption.value))
       await interaction.respond(filtered.map(choice => ({ name: choice, value: choice })))
+    }
+
+    if(interaction.commandName === "poke-judge") {
+      let choices = []
+      const focusedOption = interaction.options.getFocused(true)
+
+      if(focusedOption.name === "pokémon"){
+        pokemons = await bot.Pokemons.findAll({attributes: ["pokemon_nom", "pokemon_name", "pokemon_id"]})
+        for(pokemon of pokemons){
+          res = `#${parseInt(pokemon.dataValues.pokemon_id)+1} - ${pokemon.dataValues.pokemon_nom} (${pokemon.dataValues.pokemon_name})`
+          choices.push(res)
+        }
+      }
+      if(focusedOption.name === "nature"){
+        natures = await bot.Natures.findAll({attributes: ["nature_nom", "nature_name", "nature_incr_en", "nature_decr_en"]})
+        for(nature of natures){
+          res = `${nature.dataValues.nature_nom} (${nature.dataValues.nature_name})`
+          if(nature.dataValues.nature_incr_en) res += ` - ↑↑${nature.dataValues.nature_incr_en} | ↓↓${nature.dataValues.nature_decr_en}`
+          choices.push(res)
+        }
+      }
+      if(focusedOption.name.startsWith("sub-skill")){
+        subskills = await bot.Subskills.findAll({attributes: ["subskill_nom", "subskill_name"]})
+        for(subskill of subskills){
+          res = `${subskill.dataValues.subskill_nom} (${subskill.dataValues.subskill_name})`
+          choices.push(res)
+        }
+      }
+
+      let filtered = choices.filter(choice => choice.toLowerCase().includes(focusedOption.value.toLowerCase()))
+      if(!focusedOption.value) filtered = choices
+      if(filtered.length > 20) filtered = filtered.slice(0, 20)
+      await interaction.respond(filtered.map(choice => ({ name: choice, value: choice})))
     }
   }
 

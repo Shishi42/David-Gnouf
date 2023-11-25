@@ -239,8 +239,8 @@ module.exports = {
     types.forEach((item, i) => {
       bot.Types.create({
         type_id: i,
-        type_nom: item[0],
-        type_name: item[1],
+        type_nom: item[1],
+        type_name: item[0],
       })
     })
 

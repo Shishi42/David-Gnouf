@@ -122,7 +122,8 @@ module.exports = {
 
     total_score = nature_score + skill1_score + skill2_score + skill3_score + skill4_score + skill5_score
     skill = await bot.Skills.findOne({ where: { skill_id: pokemon.dataValues.skill_id}})
-    nature_stats = nature.dataValues.nature_incr_en ? `↑↑${nature.dataValues.nature_incr_en}  |  ↓↓${nature.dataValues.nature_decr_en}` : "↑↑None  |  ↓↓None"
+    nature_stats = nature.dataValues.nature_incr_en ? `↑↑${nature.dataValues.nature_incr_fr}  |  ↓↓${nature.dataValues.nature_decr_fr}` : "↑↑Aucun  |  ↓↓Aucun"
+    type = await bot.Types.findOne({ where: { type_id: pokemon.dataValues.type_id}})
 
     response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.dataValues.pokemon_name.toLowerCase()}`)
     poke = await response.json()
@@ -137,20 +138,20 @@ module.exports = {
 
     let embed = new Discord.EmbedBuilder()
       .setColor(bot.color)
-      .setTitle(`${pokemon.dataValues.pokemon_nom} - ${pokemon.dataValues.pokemon_tier}`)
+      .setTitle(`${pokemon.dataValues.pokemon_nom} (${type.dataValues.type_nom}) - ${pokemon.dataValues.pokemon_tier}`)
       .setDescription(`${skill.dataValues.skill_nom} - EARLY : **${rating(skill.dataValues.skill_tier_early)}**  |  LATE : **${rating(skill.dataValues.skill_tier_late)}**`)
       .setAuthor({ name: "Pokémon Sleep Judge", iconURL: "https://pbs.twimg.com/profile_images/1630213009732952065/5GdGZqse_400x400.jpg", url: "https://twitter.com/PokemonSleep" })
       .setThumbnail(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${poke.id}.png`)
       .addFields(
-    		{ name: `${nature.dataValues.nature_nom} - ${nature_stats}`, value: `**${rating(nature_score)}**`},
+    		{ name: `${nature.dataValues.nature_nom} - ${nature_stats}`, value: `${rating(nature_score)}`},
         { name: '\u200B', value: '\u200B' },
-    		{ name: `${skill1.dataValues.subskill_nom}`, value: `**${rating(skill1_score)}**`, inline: true },
-        { name: `${skill2.dataValues.subskill_nom}`, value: `**${rating(skill2_score)}**`, inline: true },
-        { name: `${skill3.dataValues.subskill_nom}`, value: `**${rating(skill3_score)}**`, inline: true },
-        { name: `${skill4.dataValues.subskill_nom}`, value: `**${rating(skill4_score)}**`, inline: true },
-        { name: `${skill5.dataValues.subskill_nom}`, value: `**${rating(skill5_score)}**`, inline: true },
+    		{ name: `${skill1.dataValues.subskill_nom}`, value: `${rating(skill1_score)}`, inline: true },
+        { name: `${skill2.dataValues.subskill_nom}`, value: `${rating(skill2_score)}`, inline: true },
+        { name: `${skill3.dataValues.subskill_nom}`, value: `${rating(skill3_score)}`, inline: true },
+        { name: `${skill4.dataValues.subskill_nom}`, value: `${rating(skill4_score)}`, inline: true },
+        { name: `${skill5.dataValues.subskill_nom}`, value: `${rating(skill5_score)}`, inline: true },
         { name: '\u200B', value: '\u200B' },
-        { name: `TOTAL SCORE`, value: `**${total_score} :arrow_right: ${rate}**`},
+        { name: `SCORE TOTAL`, value: `**${total_score} :arrow_right: ${rate}**`},
     	)
       .setTimestamp()
       .setFooter({text: `Requested by ${message.user.username}`, iconURL: `${message.user.displayAvatarURL({dynamic: true})}`})

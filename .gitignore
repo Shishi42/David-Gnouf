@@ -3,3 +3,4 @@ package-lock.json
 config.json
 event.json
 event_backup.json
+sleep.db

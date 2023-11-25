@@ -22,11 +22,11 @@ bot.player = new Player(bot)
 bot.player.extractors.loadDefault()
 
 bot.on("ready", async () => {
-  console.log(`Connecté en tant que ${bot.user.tag}!`)
+  console.log(`Connected as ${bot.user.tag}!`)
 
   await slashcommands_loader(bot)
 
-  bot.user.setPresence({activities: [{ name: "Jean-Claude coder", type: 3 }], status: 'dnd'})
+  bot.user.setPresence({activities: [{ name: "Jean-Claude coder", type: 3 }], status: "dnd"})
 })
 
 bot.on("messageCreate", async message => {
@@ -38,7 +38,7 @@ bot.on("messageCreate", async message => {
 
     if (message.content.includes("SauceNAO")){
       if(message.content.includes("&illust_id")){
-        res = message.content.split("&illust_id=")[1].split(")")[0]
+        res = message.content.split("&illust_id=")[1].split(')')[0]
         bot.channels.fetch(config.chan_artworks)
           .then(chan => chan.messages.fetch()
             .then(messages => messages.filter(m => m.author.id === bot.user.id).first().edit(messages.filter(m => m.author.id === bot.user.id).first().content + '\n' + res))
@@ -47,7 +47,7 @@ bot.on("messageCreate", async message => {
             }))
         return message.delete()
       } else if (message.content.includes("member.php&id")){
-        res = message.content.split("member.php&id=")[1].split(")")[0]
+        res = message.content.split("member.php&id=")[1].split(')')[0]
         bot.channels.fetch(config.chan_users)
           .then(chan => chan.messages.fetch()
             .then(messages => messages.filter(m => m.author.id === bot.user.id).first().edit(messages.filter(m => m.author.id === bot.user.id).first().content + '\n' + res))
@@ -57,7 +57,7 @@ bot.on("messageCreate", async message => {
         return message.delete()
       }
     } else if(message.content.includes("twitter") || message.content.includes("x.com")) {
-      res = message.content.split(".com/")[1].split("?")[0].split(")")[0]
+      res = message.content.split(".com/")[1].split('?')[0].split(')')[0]
       bot.channels.fetch(config.chan_sort)
         .then(chan => chan.messages.fetch()
           .then(messages => messages.filter(m => m.author.id === bot.user.id).first().edit(messages.filter(m => m.author.id === bot.user.id).first().content + '\n' + res))
@@ -66,7 +66,7 @@ bot.on("messageCreate", async message => {
           }))
       return message.delete()
     } else if (message.content.includes("artworks")){
-      res = message.content.split("artworks/")[1].split(")")[0]
+      res = message.content.split("artworks/")[1].split(')')[0]
       bot.channels.fetch(config.chan_artworks)
         .then(chan => chan.messages.fetch()
           .then(messages => messages.filter(m => m.author.id === bot.user.id).first().edit(messages.filter(m => m.author.id === bot.user.id).first().content + '\n' + res))
@@ -75,7 +75,7 @@ bot.on("messageCreate", async message => {
           }))
       return message.delete()
     } else if (message.content.includes("users")){
-      res = message.content.split("users/")[1].split(")")[0]
+      res = message.content.split("users/")[1].split(')')[0]
       bot.channels.fetch(config.chan_users)
         .then(chan => chan.messages.fetch()
           .then(messages => messages.filter(m => m.author.id === bot.user.id).first().edit(messages.filter(m => m.author.id === bot.user.id).first().content + '\n' + res))
@@ -88,7 +88,7 @@ bot.on("messageCreate", async message => {
 
   // say command code
   if(message.content.startsWith("!say")){
-    let args = message.content.split(" ").slice(1)
+    let args = message.content.split(' ').slice(1)
 
     if(args.length != 0){
       message.channel.send(args.join(' '))
@@ -130,7 +130,7 @@ bot.on("interactionCreate", async interaction => {
   }
 })
 
-bot.player.events.on('playerStart', (queue, track) => {
+bot.player.events.on("playerStart", (queue, track) => {
   embed = new Discord.EmbedBuilder()
     .setColor(bot.color)
     .setDescription(`Starting playing : **${track.title}**.`)

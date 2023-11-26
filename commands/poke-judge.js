@@ -63,7 +63,7 @@ module.exports = {
 
     error = ""
     choices = []
-    pokemons = bot.Pokemons.findAll({attributes: ["pokemon_nom", "pokemon_name", "pokemon_id"]})
+    pokemons = await bot.Pokemons.findAll({attributes: ["pokemon_nom", "pokemon_name", "pokemon_id"]})
     for(pokemon of pokemons){
       res = `#${parseInt(pokemon.dataValues.pokemon_id)+1} - ${pokemon.dataValues.pokemon_nom} (${pokemon.dataValues.pokemon_name})`
       choices.push(res)
@@ -74,7 +74,7 @@ module.exports = {
     if(!choices.includes(args.get("pokémon").value)) error += "The Pokémon you provided is invalid.\n"
 
     choices = []
-    natures = bot.Natures.findAll({attributes: ["nature_nom", "nature_name", "nature_incr_en", "nature_decr_en"]})
+    natures = await bot.Natures.findAll({attributes: ["nature_nom", "nature_name", "nature_incr_en", "nature_decr_en"]})
     for(nature of natures){
       res = `${nature.dataValues.nature_nom} (${nature.dataValues.nature_name})`
       if(nature.dataValues.nature_incr_en) res += ` - ↑↑${nature.dataValues.nature_incr_en} | ↓↓${nature.dataValues.nature_decr_en}`
@@ -85,7 +85,7 @@ module.exports = {
     if(!choices.includes(args.get("nature").value)) error += "The nature you provided is invalid.\n"
 
     choices = []
-    subskills = bot.Subskills.findAll({attributes: ["subskill_nom", "subskill_name"]})
+    subskills = await bot.Subskills.findAll({attributes: ["subskill_nom", "subskill_name"]})
     for(subskill of subskills){
       res = `${subskill.dataValues.subskill_nom} (${subskill.dataValues.subskill_name})`
       choices.push(res)

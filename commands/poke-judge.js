@@ -137,8 +137,8 @@ module.exports = {
 
     let embed = new Discord.EmbedBuilder()
       .setColor(bot.color)
-      .setTitle(`:red_circle: ${pokemon.dataValues.pokemon_nom} (${type.dataValues.type_nom}) ${pokemon.dataValues.pokemon_tier}`)
-      .setDescription(`${skill.dataValues.skill_nom} :arrow_right: EARLY : **${rating(skill.dataValues.skill_tier_early)}**  |  LATE : **${rating(skill.dataValues.skill_tier_late)}**`)
+      .setTitle(`:red_circle: ${pokemon.dataValues.pokemon_nom} (${type.dataValues.type_nom}) | ${pokemon.dataValues.pokemon_tier}`)
+      .setDescription(`:star: ${skill.dataValues.skill_nom}\nEARLY : **${rating(skill.dataValues.skill_tier_early)}** | LATE : **${rating(skill.dataValues.skill_tier_late)}**`)
       .setAuthor({ name: "Pokémon Sleep Rating System", iconURL: "https://pbs.twimg.com/profile_images/1630213009732952065/5GdGZqse_400x400.jpg", url: "https://twitter.com/PokemonSleep" })
       .setThumbnail(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${poke.id}.png`)
       .addFields(
@@ -149,7 +149,7 @@ module.exports = {
         { name: `:star: ${skill4.dataValues.subskill_nom}`, value: `${rating(skill4_score)}`, inline: true },
         { name: `:star: ${skill5.dataValues.subskill_nom}`, value: `${rating(skill5_score)}`, inline: true },
         { name: '\u200B', value: '\u200B' },
-        { name: `:trophy: SCORE TOTAL :trophy:`, value: `**${total_score} (${rate})**`},
+        { name: `:trophy: SCORE TOTAL :trophy:`, value: `**${total_score} :arrow_right: ${rate}**`},
     	)
       .setTimestamp()
       .setFooter({text: `Requested by ${message.user.username}`, iconURL: `${message.user.displayAvatarURL({dynamic: true})}`})

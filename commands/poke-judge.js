@@ -138,7 +138,7 @@ module.exports = {
     let embed = new Discord.EmbedBuilder()
       .setColor(bot.color)
       .setTitle(`:red_circle: ${pokemon.dataValues.pokemon_nom} (${type.dataValues.type_nom}) | ${pokemon.dataValues.pokemon_tier}`)
-      .setDescription(`:star: ${skill.dataValues.skill_nom}\nEARLY : **${rating(skill.dataValues.skill_tier_early)}** | LATE : **${rating(skill.dataValues.skill_tier_late)}**`)
+      .setDescription(`:star: **${skill.dataValues.skill_nom}**\nEARLY : ${rating(skill.dataValues.skill_tier_early)} | LATE : ${rating(skill.dataValues.skill_tier_late)}`)
       .setAuthor({ name: "Pokémon Sleep Rating System", iconURL: "https://pbs.twimg.com/profile_images/1630213009732952065/5GdGZqse_400x400.jpg", url: "https://twitter.com/PokemonSleep" })
       .setThumbnail(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${poke.id}.png`)
       .addFields(

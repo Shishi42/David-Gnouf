@@ -14,7 +14,7 @@ module.exports = {
       name: "url",
       description: "Link to a YouTube video or playlist",
       required: true,
-      autocomplete: false,
+      autocomplete: true,
     },
     {
       type: "string",
@@ -30,12 +30,21 @@ module.exports = {
     await message.deferReply()
     const player = useMainPlayer()
 
+    shuffle = false
+
     channel = message.member.voice.channel
     if (!channel) return message.editReply({content: "You need to be in a Voice Channel.", ephemeral: true})
     url = args.get("url").value
-    if (!checkLink(url)) return message.editReply({content: "URL provided is invalid.", ephemeral: true})
 
-    let shuffle = (args.get("shuffle") && args.get("shuffle").value.toLowerCase() == "yes") ? true : false
+    if(Object.keys(bot.playlist).includes(url)){
+      url = bot.playlist[url]
+      shuffle = true
+      queue = bot.player.nodes.get(message.guildId)
+      if (queue) queue.delete()
+    }
+    else if (!checkLink(url)) return message.editReply({content: "URL provided is invalid.", ephemeral: true})
+
+    if ((args.get("shuffle") && args.get("shuffle").value.toLowerCase() == "yes")) shuffle = true
 
     const searchResult = await player.search(url, { requestedBy: message.user })
 
@@ -53,10 +62,11 @@ module.exports = {
           .setFooter({text: `Requested by ${searchResult.requestedBy.username}`, iconURL: `${searchResult.requestedBy.displayAvatarURL({dynamic: true})}`})
         if(searchResult.hasPlaylist()){
           embed
-            .setDescription(`**${searchResult.playlist.title}** has been added as a **playlist** to the Queue`)
             .addFields({name: "Description", value: `${searchResult.playlist.description}`})
             .addFields({name: "Duration", value: `${searchResult.tracks.length} songs`})
             .setThumbnail(searchResult.playlist.thumbnail)
+          if(shuffle) embed.setDescription(`**${searchResult.playlist.title}** has been added as a **shuffled playlist** to the Queue`)
+          else embed.setDescription(`**${searchResult.playlist.title}** has been added as a **playlist** to the Queue`)
         } else {
           embed
             .setDescription(`**${searchResult.tracks[0].title}** has been added to the Queue`)

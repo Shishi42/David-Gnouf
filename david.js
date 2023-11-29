@@ -23,6 +23,13 @@ if(fs.existsSync("./event.json")){
 bot.player = new Player(bot)
 bot.player.extractors.loadDefault()
 
+bot.playlist = {
+  "combat" : "https://www.youtube.com/playlist?list=PLjZ9bFeB3tHnppAcv5h-AmBdIDbzeAcdl",
+  "exploration" : "https://www.youtube.com/playlist?list=PLjZ9bFeB3tHkprT_od00SyPW8Sk21-CDd",
+  "taverne" : "https://www.youtube.com/playlist?list=PLjZ9bFeB3tHl7q5_z18NKdso8jiDRNYex",
+  "donjon" : "https://www.youtube.com/playlist?list=PLjZ9bFeB3tHl771DkODYxiA2GOaKO9a34",
+}
+
 bot.on("ready", async () => {
   console.log(`Connected as ${bot.user.tag}!`)
 
@@ -261,10 +268,11 @@ bot.on("interactionCreate", async interaction => {
       let choices
       const focusedOption = interaction.options.getFocused(true)
 
+      if(focusedOption.name === "url") choices = Object.keys(bot.playlist)
       if(focusedOption.name === "shuffle") choices = ["Yes", "No"]
 
       let filtered = choices.filter(choice => choice.startsWith(focusedOption.value))
-      await interaction.respond(filtered.map(choice => ({ name: choice, value: choice })))
+      await interaction.respond(filtered.map(choice => ({ name: choice.charAt(0).toUpperCase() + choice.slice(1), value: choice })))
     }
 
     if(interaction.commandName === "poke-judge") {

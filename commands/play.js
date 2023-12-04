@@ -39,8 +39,6 @@ module.exports = {
     if(Object.keys(bot.playlist).includes(url)){
       url = bot.playlist[url]
       shuffle = true
-      queue = bot.player.nodes.get(message.guildId)
-      if (queue) queue.delete()
     }
     else if (!checkLink(url)) return message.editReply({content: "URL provided is invalid.", ephemeral: true})
 
@@ -61,6 +59,12 @@ module.exports = {
           .setTimestamp()
           .setFooter({text: `Requested by ${searchResult.requestedBy.username}`, iconURL: `${searchResult.requestedBy.displayAvatarURL({dynamic: true})}`})
         if(searchResult.hasPlaylist()){
+
+          if(Object.keys(bot.playlist).includes(args.get("url").value)){
+            queue = bot.player.nodes.get(message.guildId)
+            if (queue) queue.node.skipTo(searchResult.tracks[0])
+          }
+
           embed
             .addFields({name: "Description", value: `${searchResult.playlist.description}`})
             .addFields({name: "Duration", value: `${searchResult.tracks.length} songs`})

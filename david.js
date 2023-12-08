@@ -28,6 +28,7 @@ bot.playlist = {
   "exploration" : "https://www.youtube.com/playlist?list=PLjZ9bFeB3tHkprT_od00SyPW8Sk21-CDd",
   "taverne" : "https://www.youtube.com/playlist?list=PLjZ9bFeB3tHl7q5_z18NKdso8jiDRNYex",
   "donjon" : "https://www.youtube.com/playlist?list=PLjZ9bFeB3tHl771DkODYxiA2GOaKO9a34",
+  "boss" : "https://www.youtube.com/playlist?list=PLjZ9bFeB3tHlA4Nu4iV5qaepkJtCGpvum",
 }
 
 bot.on("ready", async () => {

@@ -89,7 +89,9 @@ module.exports = {
     nature_stats = nature.dataValues.nature_incr_en ? `:arrow_up: ${nature.dataValues.nature_incr_fr} :arrow_down: ${nature.dataValues.nature_decr_fr}` : ":arrow_up: Aucun :arrow_down: Aucun"
     type = await bot.Types.findOne({ where: { type_id: pokemon.dataValues.type_id}})
 
-    response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.dataValues.pokemon_name.toLowerCase()}`)
+    name = pokemon.dataValues.pokemon_name.toLowerCase()
+    if(name.startsWith("pikachu")) name = "pikachu"
+    response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
     poke = await response.json()
 
     let embed = new Discord.EmbedBuilder()

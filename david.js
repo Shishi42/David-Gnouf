@@ -24,17 +24,18 @@ bot.player = new Player(bot)
 bot.player.extractors.loadDefault()
 
 bot.playlist = {
-  "combat" : "https://www.youtube.com/playlist?list=PLjZ9bFeB3tHnppAcv5h-AmBdIDbzeAcdl",
-  "exploration" : "https://www.youtube.com/playlist?list=PLjZ9bFeB3tHkprT_od00SyPW8Sk21-CDd",
-  "taverne" : "https://www.youtube.com/playlist?list=PLjZ9bFeB3tHl7q5_z18NKdso8jiDRNYex",
-  "donjon" : "https://www.youtube.com/playlist?list=PLjZ9bFeB3tHl771DkODYxiA2GOaKO9a34",
-  "boss" : "https://www.youtube.com/playlist?list=PLjZ9bFeB3tHlA4Nu4iV5qaepkJtCGpvum",
 
-  "donjon (shishi)" : "https://www.youtube.com/playlist?list=PLpzykkaTpoRYpDQ1EV0fGPvpaipR_N4kc",
-  "ville (shishi)" : "https://www.youtube.com/playlist?list=PLpzykkaTpoRaHpBqAqDNJXNI5ZGnwIZ_G",
+  "boss" : "https://www.youtube.com/playlist?list=PLjZ9bFeB3tHlA4Nu4iV5qaepkJtCGpvum",
   "boss (shishi)" : "https://www.youtube.com/playlist?list=PLpzykkaTpoRYAaMLlPantdH2NETdusfPB",
+  "combat" : "https://www.youtube.com/playlist?list=PLjZ9bFeB3tHnppAcv5h-AmBdIDbzeAcdl",
   "combat (shishi)" : "https://www.youtube.com/playlist?list=PLpzykkaTpoRYMyc89UTRNZv8ykVjZgSIo",
-  "c la merde" : "https://www.youtube.com/playlist?list=PLpzykkaTpoRb9RjeiWwQZ9UbHsV-AnasY",
+  "exploration" : "https://www.youtube.com/playlist?list=PLjZ9bFeB3tHkprT_od00SyPW8Sk21-CDd",
+  "donjon" : "https://www.youtube.com/playlist?list=PLjZ9bFeB3tHl771DkODYxiA2GOaKO9a34",
+  "donjon (shishi)" : "https://www.youtube.com/playlist?list=PLpzykkaTpoRYpDQ1EV0fGPvpaipR_N4kc",
+  "taverne" : "https://www.youtube.com/playlist?list=PLjZ9bFeB3tHl7q5_z18NKdso8jiDRNYex",	
+  "ville (shishi)" : "https://www.youtube.com/playlist?list=PLpzykkaTpoRaHpBqAqDNJXNI5ZGnwIZ_G",
+	
+  "clamerde" : "https://www.youtube.com/playlist?list=PLpzykkaTpoRb9RjeiWwQZ9UbHsV-AnasY",	
   "ilécon" : "https://www.youtube.com/playlist?list=PLpzykkaTpoRYLfQD-5gRohATO1_NhcUnK",
   "trofor" : "https://www.youtube.com/playlist?list=PLpzykkaTpoRZwLdVUVcjilOwhOEnvLDbe",
 

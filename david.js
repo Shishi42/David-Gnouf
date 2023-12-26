@@ -29,6 +29,15 @@ bot.playlist = {
   "taverne" : "https://www.youtube.com/playlist?list=PLjZ9bFeB3tHl7q5_z18NKdso8jiDRNYex",
   "donjon" : "https://www.youtube.com/playlist?list=PLjZ9bFeB3tHl771DkODYxiA2GOaKO9a34",
   "boss" : "https://www.youtube.com/playlist?list=PLjZ9bFeB3tHlA4Nu4iV5qaepkJtCGpvum",
+
+  "donjon (shishi)" : "https://www.youtube.com/playlist?list=PLpzykkaTpoRYpDQ1EV0fGPvpaipR_N4kc",
+  "ville (shishi)" : "https://www.youtube.com/playlist?list=PLpzykkaTpoRaHpBqAqDNJXNI5ZGnwIZ_G",
+  "boss (shishi)" : "https://www.youtube.com/playlist?list=PLpzykkaTpoRYAaMLlPantdH2NETdusfPB",
+  "combat (shishi)" : "https://www.youtube.com/playlist?list=PLpzykkaTpoRYMyc89UTRNZv8ykVjZgSIo",
+  "c la merde" : "https://www.youtube.com/playlist?list=PLpzykkaTpoRb9RjeiWwQZ9UbHsV-AnasY",
+  "ilécon" : "https://www.youtube.com/playlist?list=PLpzykkaTpoRYLfQD-5gRohATO1_NhcUnK",
+  "trofor" : "https://www.youtube.com/playlist?list=PLpzykkaTpoRZwLdVUVcjilOwhOEnvLDbe",
+
 }
 
 bot.on("ready", async () => {

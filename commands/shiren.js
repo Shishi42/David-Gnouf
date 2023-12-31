@@ -68,7 +68,7 @@ module.exports = {
     if(dice) res += `, you rolled a ${dice_roll}.`
     else res += "."
 
-    await message.followUp({content: res, ephemeral: true})
+    await message.member.send(res)
 
     function sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms))

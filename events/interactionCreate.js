@@ -14,8 +14,6 @@ module.exports = async (bot, interaction) => {
       if(!focusedOption.value) filtered = choices
       if(filtered.length > 20) filtered = filtered.slice(0, 20)
 
-      console.log(filtered)
-
       await interaction.respond(filtered.map(choice => ({ name: choice, value: choice })))
     }
     if(interaction.commandName === "shiren") {
@@ -73,6 +71,7 @@ module.exports = async (bot, interaction) => {
   }
 
   if(interaction.type === Discord.InteractionType.MessageComponent && interaction.isButton()) {
+    console.log("test")
     if(interaction.customId === 'playpause') require(`../commands/pause.js`).run(bot, interaction)
     if(interaction.customId === 'skip') require(`../commands/skip.js`).run(bot, interaction)
     if(interaction.customId === 'queue') require(`../commands/queue.js`).run(bot, interaction)

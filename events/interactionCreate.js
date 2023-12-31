@@ -10,11 +10,9 @@ module.exports = async (bot, interaction) => {
       let choices = bot.commands.map(cmd => cmd.name)
       const focusedOption = interaction.options.getFocused(true)
 
-      console.log(choices)
-
-      let filtered = choices.filter(choice => choice.name.toLowerCase().includes(focusedOption.value.toLowerCase()))
+      let filtered = choices.filter(choice => choice.toLowerCase().includes(focusedOption.value.toLowerCase()))
       if(!focusedOption.value) filtered = choices
-      if(filtered.size > 20) filtered = [filtered].slice(0, 20)
+      if(filtered.length > 20) filtered = filtered.slice(0, 20)
 
       console.log(filtered)
 

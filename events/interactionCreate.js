@@ -7,8 +7,10 @@ module.exports = async (bot, interaction) => {
     let entry = interaction.options.getFocused()
 
     if(interaction.commandName === "help") {
-      let choices = bot.commands.filter(cmd => cmd.name.includes(entry))
+      let choices = bot.commands.map(cmd => cmd.name)
       const focusedOption = interaction.options.getFocused(true)
+
+      console.log(choices)
 
       let filtered = choices.filter(choice => choice.name.toLowerCase().includes(focusedOption.value.toLowerCase()))
       if(!focusedOption.value) filtered = choices

@@ -71,7 +71,6 @@ module.exports = async (bot, interaction) => {
   }
 
   if(interaction.type === Discord.InteractionType.MessageComponent && interaction.isButton()) {
-    console.log("test")
     if(interaction.customId === 'playpause') require(`../commands/pause.js`).run(bot, interaction)
     if(interaction.customId === 'skip') require(`../commands/skip.js`).run(bot, interaction)
     if(interaction.customId === 'queue') require(`../commands/queue.js`).run(bot, interaction)

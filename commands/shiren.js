@@ -65,8 +65,8 @@ module.exports = {
     await sleep(rand_time*1000)
 
     res = `Wake the fuck up, ~~samurai~~ ${message.user}`
-    if(dice) res += `, you rolled a ${dice_roll}.`
-    else res += "."
+    if(dice) res += `, you rolled a ${dice_roll}`
+    res += "."
 
     await message.member.send(res)
 

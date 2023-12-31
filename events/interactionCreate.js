@@ -78,7 +78,7 @@ module.exports = async (bot, interaction) => {
   if(interaction.type === Discord.InteractionType.MessageComponent && interaction.isAnySelectMenu()) {
     if(interaction.customId === 'channel'){
       bot.distant_channel = interaction.values[0]
-      await interaction.reply({content : `Distant channel is now ${bot.channels.cache.get(bot.distant_channel)}.`, ephemeral : !bot.player_logs})
+      // await interaction.reply({content : `Distant channel is now ${bot.channels.cache.get(bot.distant_channel)}.`, ephemeral : !bot.player_logs})
     }
     if(interaction.customId.includes('song')) require(`../commands/play.js`).run(bot, interaction, {url : interaction.values, source : "dj"})
   }

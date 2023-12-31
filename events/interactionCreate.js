@@ -8,7 +8,12 @@ module.exports = async (bot, interaction) => {
 
     if(interaction.commandName === "help") {
       let choices = bot.commands.filter(cmd => cmd.name.includes(entry))
-      await interaction.respond(entry === "" ? bot.commands.map(cmd => ({name: cmd.name, value: cmd.name})) : choices.map(choice => ({name: choice.name, value: choice.name})))
+
+      let filtered = choices.filter(choice => choice.toLowerCase().includes(focusedOption.value.toLowerCase()))
+      if(!focusedOption.value) filtered = choices
+      if(filtered.length > 20) filtered = filtered.slice(0, 20)
+
+      await interaction.respond(filtered.map(choice => ({ name: choice.name, value: choice.name })))
     }
     if(interaction.commandName === "shiren") {
       let choices = ["d2","d4","d6","d8","d10","d12","d20","d100"]
@@ -76,7 +81,7 @@ module.exports = async (bot, interaction) => {
   }
 
   if(interaction.type === Discord.InteractionType.MessageComponent && interaction.isAnySelectMenu()) {
-    if(interaction.customId === 'channelselect'){
+    if(interaction.customId === 'channel'){
       bot.distant_channel = interaction.values[0]
       // await interaction.reply({content : `Distant channel is now ${bot.channels.cache.get(bot.distant_channel)}.`, ephemeral : !bot.player_logs})
     }

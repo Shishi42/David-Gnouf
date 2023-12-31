@@ -32,9 +32,14 @@ module.exports = {
 
     shuffle = false
 
-    channel = message.member.voice.channel
+    if(args.source == "dj"){
+      channel = bot.distant_channel
+      url = args.url[0]
+    } else {
+      channel = message.member.voice.channel
+      url = args.get("url").value
+    }
     if (!channel) return message.editReply({content: "You need to be in a Voice Channel.", ephemeral: true})
-    url = args.get("url").value
 
     if(Object.keys(bot.playlist).includes(url)){
       url = bot.playlist[url]
@@ -42,7 +47,7 @@ module.exports = {
     }
     else if (!checkLink(url)) return message.editReply({content: "URL provided is invalid.", ephemeral: true})
 
-    if ((args.get("shuffle") && args.get("shuffle").value.toLowerCase() == "yes")) shuffle = true
+    if ((args.source != "dj" && args.get("shuffle") && args.get("shuffle").value.toLowerCase() == "yes")) shuffle = true
 
     const searchResult = await player.search(url, { requestedBy: message.user })
 
@@ -78,7 +83,7 @@ module.exports = {
             .addFields({name: "Duration", value: `${searchResult.tracks[0].duration}`})
             .setThumbnail(searchResult.tracks[0].thumbnail)
         }
-        await message.editReply({ embeds: [embed] })
+        await message.editReply({ embeds: [embed], ephemeral : !bot.player_logs })
       } catch (e) {
           return message.followUp(`Something went wrong: ${e}`)
       }

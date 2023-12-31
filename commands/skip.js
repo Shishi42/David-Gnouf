@@ -21,14 +21,14 @@ module.exports = {
     const queue = bot.player.nodes.get(message.guildId)
 
 		if (!queue){
-			await message.reply({content: "There are no songs in the queue.", ephemeral: true})
+			await message.reply({content: "There are **no songs** in the queue.", ephemeral: true})
 			return
 		}
 
-    if(args.get("number") && isNaN(args.get("number").value)) return message.reply({content: "The number of skip you provided is invalid.", ephemeral: true})
-    if(args.get("number") && parseInt(args.get("number").value) >= queue.tracks.data.length) return message.reply({content: `The number of skip you provided is greater than the number of songs in the queue :arrow_right: **${queue.tracks.data.length}** songs.`, ephemeral: true})
+    if(args && args.get("number") && isNaN(args.get("number").value)) return message.reply({content: "The number of skip you provided is invalid.", ephemeral: true})
+    if(args && args.get("number") && parseInt(args.get("number").value) >= queue.tracks.data.length) return message.reply({content: `The number of skip you provided is greater than the number of songs in the queue :arrow_right: **${queue.tracks.data.length}** songs.`, ephemeral: true})
 
-    args.get("number") ? num = parseInt(args.get("number").value) : num = 1
+    args && args.get("number") ? num = parseInt(args.get("number").value) : num = 1
 
     const currentSong = queue.currentTrack
     embed = new Discord.EmbedBuilder()
@@ -48,6 +48,6 @@ module.exports = {
         .setFooter({text: `Song requested by ${currentSong.requestedBy.username}`, iconURL: `${currentSong.requestedBy.displayAvatarURL({dynamic: true})}`})
     }
 
-    await message.reply({ embeds: [embed] })
+    await message.reply({ embeds: [embed], ephemeral : !bot.player_logs})
   }
 }

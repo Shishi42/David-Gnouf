@@ -31,7 +31,8 @@ module.exports = {
           .setFooter({text: `Requested by ${message.user.username}`, iconURL: `${message.user.displayAvatarURL({dynamic: true})}`})
           .setTimestamp()
           .setColor(bot.color)
-      ]
+      ],
+      ephemeral : !bot.player_logs
     })
   }
 }

@@ -64,6 +64,25 @@ module.exports = async (bot, interaction) => {
     }
   }
 
+  if(interaction.type === Discord.InteractionType.MessageComponent && interaction.isButton()) {
+    if(interaction.customId === 'playpause') require(`../commands/pause.js`).run(bot, interaction)
+    if(interaction.customId === 'skip') require(`../commands/skip.js`).run(bot, interaction)
+    if(interaction.customId === 'queue') require(`../commands/queue.js`).run(bot, interaction)
+    if(interaction.customId === 'leave') require(`../commands/end.js`).run(bot, interaction)
+    if(interaction.customId === 'logs'){
+      bot.player_logs = !bot.player_logs
+      await interaction.reply(`Player logs is now **${bot.player_logs ? "on" : "off"}**.`)
+    }
+  }
+
+  if(interaction.type === Discord.InteractionType.MessageComponent && interaction.isAnySelectMenu()) {
+    if(interaction.customId === 'channel'){
+      bot.distant_channel = interaction.values[0]
+      await interaction.reply({content : `Distant channel is now ${bot.channels.cache.get(bot.distant_channel)}.`, ephemeral : !bot.player_logs})
+    }
+    if(interaction.customId.includes('song')) require(`../commands/play.js`).run(bot, interaction, {url : interaction.values, source : "dj"})
+  }
+
   if(interaction.type === Discord.InteractionType.ApplicationCommand) {
    let command = require(`../commands/${interaction.commandName}`)
    command.run(bot, interaction, interaction.options)

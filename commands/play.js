@@ -39,6 +39,7 @@ module.exports = {
       channel = message.member.voice.channel
       url = args.get("url").value
     }
+    original_url = url
     if (!channel) return message.editReply({content: "You need to be in a Voice Channel.", ephemeral: true})
 
     if(Object.keys(bot.playlist).includes(url)){
@@ -59,7 +60,7 @@ module.exports = {
         if(shuffle) searchResult.tracks = searchResult.tracks.sort(() => Math.random() - 0.5)
         await player.play(channel, searchResult, { nodeOptions: { metadata: message } })
 
-        if(Object.keys(bot.playlist).includes(args.get("url").value)){
+        if(Object.keys(bot.playlist).includes(original_url)){
           queue = bot.player.nodes.get(message.guildId)
           if (queue) queue.node.skipTo(searchResult.tracks[0])
         }

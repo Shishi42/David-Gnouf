@@ -44,7 +44,7 @@ module.exports = {
         .setStyle(Discord.ButtonStyle.Secondary)
 
     channelSelect = new Discord.ChannelSelectMenuBuilder()
-  			.setCustomId("channel")
+  			.setCustomId("channelselect")
   			.setPlaceholder("Select voice channel")
   			.setMinValues(1)
   			.setMaxValues(1)

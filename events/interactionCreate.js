@@ -76,7 +76,7 @@ module.exports = async (bot, interaction) => {
   }
 
   if(interaction.type === Discord.InteractionType.MessageComponent && interaction.isAnySelectMenu()) {
-    if(interaction.customId === 'channel'){
+    if(interaction.customId === 'channelselect'){
       bot.distant_channel = interaction.values[0]
       // await interaction.reply({content : `Distant channel is now ${bot.channels.cache.get(bot.distant_channel)}.`, ephemeral : !bot.player_logs})
     }

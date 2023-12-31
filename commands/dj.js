@@ -73,7 +73,7 @@ module.exports = {
               .setValue(url))
         )
 
-    button_row = new Discord.ActionRowBuilder().addComponents(playpause, skip, queue, leave, logs)
+    button_row = new Discord.ActionRowBuilder().addComponents(playpause, skip, leave, logs)
     channel_row = new Discord.ActionRowBuilder().addComponents(channelSelect)
     song_row = new Discord.ActionRowBuilder().addComponents(songSelect)
     campaign_row = new Discord.ActionRowBuilder().addComponents(campaingSelect)

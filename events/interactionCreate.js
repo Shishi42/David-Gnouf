@@ -14,6 +14,8 @@ module.exports = async (bot, interaction) => {
 
       let filtered = choices.filter(choice => choice.name.toLowerCase().includes(focusedOption.value.toLowerCase()))
       if(!focusedOption.value) filtered = choices
+      console.log(filtered)
+      console.log(filtered.length)
       if(filtered.length > 20) filtered = filtered.slice(0, 20)
 
       await interaction.respond(filtered.map(choice => ({ name: choice.name, value: choice.name })))

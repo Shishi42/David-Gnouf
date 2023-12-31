@@ -3,8 +3,6 @@ const config = require("./config.json")
 
 const bot = new Discord.Client({intents: 3276799})
 
-const slashcommands_loader = require("./slashcommands_loader")
-
 const cron = require("cron")
 const jsonfile = require ("jsonfile")
 const fs = require("fs")
@@ -15,10 +13,6 @@ const Sequelize = require("sequelize")
 bot.commands = new Discord.Collection()
 bot.eventjson = {}
 bot.color = "553380"
-
-if(fs.existsSync("./event.json")){
-  bot.eventjson = jsonfile.readFileSync("./event.json")
-}
 
 bot.player = new Player(bot)
 bot.player.extractors.loadDefault()
@@ -32,328 +26,62 @@ bot.playlist = {
   "exploration" : "https://www.youtube.com/playlist?list=PLjZ9bFeB3tHkprT_od00SyPW8Sk21-CDd",
   "donjon" : "https://www.youtube.com/playlist?list=PLjZ9bFeB3tHl771DkODYxiA2GOaKO9a34",
   "donjon (shishi)" : "https://www.youtube.com/playlist?list=PLpzykkaTpoRYpDQ1EV0fGPvpaipR_N4kc",
-  "taverne" : "https://www.youtube.com/playlist?list=PLjZ9bFeB3tHl7q5_z18NKdso8jiDRNYex",	
+  "taverne" : "https://www.youtube.com/playlist?list=PLjZ9bFeB3tHl7q5_z18NKdso8jiDRNYex",
   "ville (shishi)" : "https://www.youtube.com/playlist?list=PLpzykkaTpoRaHpBqAqDNJXNI5ZGnwIZ_G",
-	
-  "clamerde" : "https://www.youtube.com/playlist?list=PLpzykkaTpoRb9RjeiWwQZ9UbHsV-AnasY",	
+
+  "clamerde" : "https://www.youtube.com/playlist?list=PLpzykkaTpoRb9RjeiWwQZ9UbHsV-AnasY",
   "ilécon" : "https://www.youtube.com/playlist?list=PLpzykkaTpoRYLfQD-5gRohATO1_NhcUnK",
   "trofor" : "https://www.youtube.com/playlist?list=PLpzykkaTpoRZwLdVUVcjilOwhOEnvLDbe",
 
+  "[A] La vieille route de Svalich" : "https://youtu.be/9G6CskLxgMI",
+  "[B] Les portes de Barovie" : "https://youtu.be/9G6CskLxgMI",
+  "[C] Le bois de Svalich" : "https://youtu.be/eePl-I8heFc",
+  "[D] L'Ivlis" : "https://youtu.be/4W2EfqdOmiI",
+  "[E] Village de Barovie" : "https://youtu.be/nnEGIH1mXwI",
+  "[E] Village de Barovie - Funeste demeure" : "https://youtu.be/GOTyzCntzJo",
+  "[E] Village de Barovie - Donjon de la Funeste demeure" : "https://youtu.be/eqUiXz1tcmM",
+  "[F] Carrefour de l'Ivlis" : "https://youtu.be/9G6CskLxgMI",
+  "[G] Campement du bief de Tser" : "https://youtu.be/7KFoj-SOfHs",
+  "[H] Chutes de Tser" : "https://youtu.be/4W2EfqdOmiI",
+  "[I] La calèche Noire" : "https://youtu.be/rfA-pzDkERs",
+  "[J] Portes de Ravenloft" : "https://youtu.be/rfA-pzDkERs",
+  "[K] Le château de Ravenloft" : "https://youtu.be/rfA-pzDkERs",
+  "[K] Le château de Ravenloft - Catacombes" : "https://youtu.be/WPpVMmTt74Q",
+  "[L] Lac Zarovich" : "https://youtu.be/4W2EfqdOmiI",
+  "[M] Le Mage Fou du Mont Baratok" : "https://youtu.be/dHRcgk7MBHw",
+  "[N] La ville de Vallaki" : "https://youtu.be/2UPkwe_5p_w",
+  "[O] Le moulin d'Esquilles" : "https://youtu.be/J63qJ_GFV_k",
+  "[P] Le carrefour de la Luna" : "https://youtu.be/9G6CskLxgMI",
+  "[Q] Argynvostholt" : "https://youtu.be/K08IQhgXDWQ",
+  "[R] Le carrefour de la Corvide" : "https://youtu.be/9G6CskLxgMI",
+  "[S] Krezk" : "https://youtu.be/ZRnLm7BJMnw",
+  "[S] Krezk - Abbaye Sainte Markovia" : "https://youtu.be/8AODR94oNMo",
+  "[S] Krezk - Madhouse" : "https://youtu.be/1gDfJHT5n0U",
+  "[T] La passe de Tsolenka" : "https://youtu.be/L_eIOeXIEfo",
+  "[U] Les ruines de Bérez" : "https://youtu.be/9MsH9vN1aFQ",
+  "[V] La Tour de Van Richten" : "https://youtu.be/1u7rJTtlbKw",
+  "[W] Le Magicien des Vins" : "https://youtu.be/4hT8zvR-nkg",
+  "[X] Le Temple d'Ambre" : "https://youtu.be/Dd91LPwFAMk",
+  "[Y] La colline d'Antan" : "https://youtu.be/9G6CskLxgMI",
+  "[Z] La tanière des loups-garous" : "https://youtu.be/128kAIlwh4g",
+  "[?] Les brumes de Ravenloft" : "https://youtu.be/J41ipvUvIzI",
+
 }
 
-bot.on("ready", async () => {
-  console.log(`Connected as ${bot.user.tag}!`)
-
-  bot.db = new Sequelize({
-    dialect: "sqlite",
-    storage: "./sleep.db"
-  })
-
-  bot.Pokemons = bot.db.define("pokemon", {
-    pokemon_id: {
-      type: Sequelize.STRING,
-      allowNull: false,
-      primaryKey: true,
-      unique: true,
-    },
-    pokemon_nom: {
-      type: Sequelize.STRING,
-      allowNull: false,
-      unique: true,
-    },
-    pokemon_name: {
-      type: Sequelize.STRING,
-      allowNull: false,
-      unique: true,
-    },
-    type_id: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
-    skill_id: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
-    pokemon_tier: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
-  })
-
-  bot.Types = bot.db.define("type", {
-    type_id: {
-      type: Sequelize.STRING,
-      allowNull: false,
-      primaryKey: true,
-      unique: true,
-    },
-    type_nom: {
-      type: Sequelize.STRING,
-      allowNull: false,
-      unique: true,
-    },
-    type_name: {
-      type: Sequelize.STRING,
-      allowNull: false,
-      unique: true,
-    },
-  })
-
-  bot.Skills = bot.db.define("skill", {
-    skill_id: {
-      type: Sequelize.STRING,
-      allowNull: false,
-      primaryKey: true,
-      unique: true,
-    },
-    skill_nom: {
-      type: Sequelize.STRING,
-      allowNull: false,
-      unique: true,
-    },
-    skill_name: {
-      type: Sequelize.STRING,
-      allowNull: false,
-      unique: true,
-    },
-    skill_tier_early: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
-    skill_tier_late: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
-  })
-
-  bot.Subskills = bot.db.define("subskill", {
-    subskill_id: {
-      type: Sequelize.STRING,
-      allowNull: false,
-      primaryKey: true,
-      unique: true,
-    },
-    subskill_nom: {
-      type: Sequelize.STRING,
-      allowNull: false,
-      unique: true,
-    },
-    subskill_name: {
-      type: Sequelize.STRING,
-      allowNull: false,
-      unique: true,
-    },
-  })
-
-  bot.Natures = bot.db.define("natures", {
-    nature_id: {
-      type: Sequelize.STRING,
-      allowNull: false,
-      primaryKey: true,
-      unique: true,
-    },
-    nature_nom: {
-      type: Sequelize.STRING,
-      allowNull: false,
-      unique: true,
-    },
-    nature_name: {
-      type: Sequelize.STRING,
-      allowNull: false,
-      unique: true,
-    },
-    nature_incr_fr: {
-      type: Sequelize.STRING,
-    },
-    nature_incr_en: {
-      type: Sequelize.STRING,
-    },
-    nature_decr_fr: {
-      type: Sequelize.STRING,
-    },
-    nature_decr_en: {
-      type: Sequelize.STRING,
-    },
-  })
-
-  await bot.Pokemons.sync()
-  await bot.Types.sync()
-  await bot.Skills.sync()
-  await bot.Subskills.sync()
-  await bot.Natures.sync()
-
-  if(!await bot.Pokemons.findOne()) await require("./db_load.js").run(bot)
-
-  console.log("Database Online.")
-
-  await slashcommands_loader(bot)
-
-  bot.user.setPresence({activities: [{ name: "Jean-Claude coder", type: 3 }], status: "dnd"})
+fs.readdirSync("./events/").filter(f => !f.startsWith(".")).forEach(async file => {
+  let event = require(`./events/${file}`)
+  bot.on(file.split(".js").join(""), event.bind(null, bot))
 })
+bot.player.events.on("playerStart", require(`./events/.playerStart.js`).bind(null, bot))
 
-bot.on("messageCreate", async message => {
-
-  if(message.author.bot || message.channel.type === "dm") return
-
-  // prepix code
-  if(message.channel.id == config.chan_prepix){
-
-    if (message.content.includes("SauceNAO")){
-      if(message.content.includes("&illust_id")){
-        res = message.content.split("&illust_id=")[1].split(')')[0]
-        bot.channels.fetch(config.chan_artworks)
-          .then(chan => chan.messages.fetch()
-            .then(messages => messages.filter(m => m.author.id === bot.user.id).first().edit(messages.filter(m => m.author.id === bot.user.id).first().content + '\n' + res))
-            .catch((error) => {
-              bot.channels.cache.get(config.chan_artworks).send(res)
-            }))
-        return message.delete()
-      } else if (message.content.includes("member.php&id")){
-        res = message.content.split("member.php&id=")[1].split(')')[0]
-        bot.channels.fetch(config.chan_users)
-          .then(chan => chan.messages.fetch()
-            .then(messages => messages.filter(m => m.author.id === bot.user.id).first().edit(messages.filter(m => m.author.id === bot.user.id).first().content + '\n' + res))
-            .catch((error) => {
-              bot.channels.cache.get(config.chan_users).send(res)
-            }))
-        return message.delete()
-      }
-    } else if(message.content.includes("twitter") || message.content.includes("x.com")) {
-      res = message.content.split(".com/")[1].split('?')[0].split(')')[0]
-      bot.channels.fetch(config.chan_sort)
-        .then(chan => chan.messages.fetch()
-          .then(messages => messages.filter(m => m.author.id === bot.user.id).first().edit(messages.filter(m => m.author.id === bot.user.id).first().content + '\n' + res))
-          .catch((error) => {
-            bot.channels.cache.get(config.chan_sort).send(res)
-          }))
-      return message.delete()
-    } else if (message.content.includes("artworks")){
-      res = message.content.split("artworks/")[1].split(')')[0]
-      bot.channels.fetch(config.chan_artworks)
-        .then(chan => chan.messages.fetch()
-          .then(messages => messages.filter(m => m.author.id === bot.user.id).first().edit(messages.filter(m => m.author.id === bot.user.id).first().content + '\n' + res))
-          .catch((error) => {
-            bot.channels.cache.get(config.chan_artworks).send(res)
-          }))
-      return message.delete()
-    } else if (message.content.includes("users")){
-      res = message.content.split("users/")[1].split(')')[0]
-      bot.channels.fetch(config.chan_users)
-        .then(chan => chan.messages.fetch()
-          .then(messages => messages.filter(m => m.author.id === bot.user.id).first().edit(messages.filter(m => m.author.id === bot.user.id).first().content + '\n' + res))
-          .catch((error) => {
-            bot.channels.cache.get(config.chan_users).send(res)
-          }))
-      return message.delete()
-    }
-  }
-
-  // say command code
-  if(message.content.startsWith("!say")){
-    let args = message.content.split(' ').slice(1)
-
-    if(args.length != 0){
-      message.channel.send(args.join(' '))
-    }
-    return message.delete()
-  }
-})
-
-bot.on("interactionCreate", async interaction => {
-
-  if(interaction.type === Discord.InteractionType.ApplicationCommandAutocomplete) {
-
-    let entry = interaction.options.getFocused()
-
-    if(interaction.commandName === "help") {
-      let choices = bot.commands.filter(cmd => cmd.name.includes(entry))
-      await interaction.respond(entry === "" ? bot.commands.map(cmd => ({name: cmd.name, value: cmd.name})) : choices.map(choice => ({name: choice.name, value: choice.name})))
-    }
-    if(interaction.commandName === "shiren") {
-      let choices = ["d2","d4","d6","d8","d10","d12","d20","d100"]
-      let focusedValue = interaction.options.getFocused()
-		  let filtered = choices.filter(choice => choice.startsWith(focusedValue))
-		  await interaction.respond(filtered.map(choice => ({ name: choice, value: choice })))
-    }
-    if(interaction.commandName === "play") {
-      let choices
-      const focusedOption = interaction.options.getFocused(true)
-
-      if(focusedOption.name === "url") choices = Object.keys(bot.playlist)
-      if(focusedOption.name === "shuffle") choices = ["Yes", "No"]
-
-      let filtered = choices.filter(choice => choice.startsWith(focusedOption.value))
-      await interaction.respond(filtered.map(choice => ({ name: choice.charAt(0).toUpperCase() + choice.slice(1), value: choice })))
-    }
-
-    if(interaction.commandName === "poke-judge") {
-      let choices = []
-      const focusedOption = interaction.options.getFocused(true)
-
-      if(focusedOption.name === "pokémon"){
-        pokemons = await bot.Pokemons.findAll({attributes: ["pokemon_nom", "pokemon_name", "pokemon_id"]})
-        for(pokemon of pokemons){
-          // res = `#${parseInt(pokemon.dataValues.pokemon_id)+1} - ${pokemon.dataValues.pokemon_nom} (${pokemon.dataValues.pokemon_name})`
-          res = `${pokemon.dataValues.pokemon_nom} (${pokemon.dataValues.pokemon_name})`
-          choices.push(res)
-        }
-      }
-      if(focusedOption.name === "nature"){
-        natures = await bot.Natures.findAll({attributes: ["nature_nom", "nature_name", "nature_incr_en", "nature_decr_en"]})
-        for(nature of natures){
-          res = `${nature.dataValues.nature_nom} (${nature.dataValues.nature_name})`
-          // if(nature.dataValues.nature_incr_en) res += ` - ↑↑${nature.dataValues.nature_incr_en} | ↓↓${nature.dataValues.nature_decr_en}`
-          choices.push(res)
-        }
-      }
-      if(focusedOption.name.startsWith("sub-skill")){
-        subskills = await bot.Subskills.findAll({attributes: ["subskill_nom", "subskill_name"]})
-        for(subskill of subskills){
-          res = `${subskill.dataValues.subskill_nom} (${subskill.dataValues.subskill_name})`
-          choices.push(res)
-        }
-      }
-
-      let filtered = choices.filter(choice => choice.toLowerCase().includes(focusedOption.value.toLowerCase()))
-      if(!focusedOption.value) filtered = choices
-      if(filtered.length > 20) filtered = filtered.slice(0, 20)
-      await interaction.respond(filtered.map(choice => ({ name: choice, value: choice.split('(')[0].slice(0, -1)})))
-    }
-  }
-
-  if(interaction.type === Discord.InteractionType.ApplicationCommand) {
-   let command = require(`./commands/${interaction.commandName}`)
-   command.run(bot, interaction, interaction.options)
-  }
-})
-
-bot.player.events.on("playerStart", (queue, track) => {
-  embed = new Discord.EmbedBuilder()
-    .setColor(bot.color)
-    .setDescription(`Starting playing : **${track.title}**.`)
-    .addFields({name: "Author", value: `${track.author}`})
-    .addFields({name: "Duration", value: `${track.duration}`})
-    .addFields({name: "Views", value: `${track.views}`})
-    .setThumbnail(track.thumbnail)
-    .setTimestamp()
-    .setFooter({text: `Song requested by ${track.requestedBy.username}`, iconURL: `${track.requestedBy.displayAvatarURL({dynamic: true})}`})
-  if(track.playlist) embed.addFields({name: "Playlist", value: `${track.playlist.title}`})
-
-  queue.metadata.channel.send({ embeds: [embed] })
-})
+if(fs.existsSync("./event.json")){
+  bot.eventjson = jsonfile.readFileSync("./event.json")
+}
 
 let event_job = new cron.CronJob('00 00 00 * * *', () => {
-  checkEvent()
-})
-
-function checkEvent(){
   var date = new Date()
   datestr = date.getDate().toString()+"/"+(date.getMonth()+1).toString()
-  if(bot.eventjson[datestr] != undefined){
-    bot.channels.cache.get("295252502679650315").send("<@&474513550992211979> "+bot.eventjson[datestr])
-  }
-}
-
-event_job.start()
+  if(bot.eventjson[datestr] != undefined) bot.channels.cache.get("295252502679650315").send("<@&474513550992211979> "+bot.eventjson[datestr])
+}).start()
 
 bot.login(config.token)

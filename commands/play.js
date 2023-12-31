@@ -83,8 +83,8 @@ module.exports = {
             .addFields({name: "Author", value: `${searchResult.tracks[0].author}`})
             .addFields({name: "Duration", value: `${searchResult.tracks[0].duration}`})
             .setThumbnail(searchResult.tracks[0].thumbnail)
-        }
-        await message.editReply({ embeds: [embed], ephemeral : !bot.player_logs })
+        } 
+        if(bot.player_logs) await message.editReply({ embeds: [embed] })
       } catch (e) {
           return message.followUp(`Something went wrong: ${e}`)
       }

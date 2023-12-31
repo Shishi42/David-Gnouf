@@ -14,6 +14,8 @@ module.exports = async (bot, interaction) => {
       if(!focusedOption.value) filtered = choices
       if(filtered.size > 20) filtered = [filtered].slice(0, 20)
 
+      console.log(filtered)
+
       await interaction.respond(filtered.map(choice => ({ name: choice.name, value: choice.name })))
     }
     if(interaction.commandName === "shiren") {

@@ -16,7 +16,7 @@ module.exports = async (bot, interaction) => {
 
       console.log(filtered)
 
-      await interaction.respond(filtered.map(choice => ({ name: choice.name, value: choice.name })))
+      await interaction.respond(filtered.map(choice => ({ name: choice, value: choice })))
     }
     if(interaction.commandName === "shiren") {
       let choices = ["d2","d4","d6","d8","d10","d12","d20","d100"]

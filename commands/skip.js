@@ -30,6 +30,7 @@ module.exports = {
 
     args && args != "dj" && args.get("number") ? num = parseInt(args.get("number").value) : num = 1
 
+    console.log(num)
     const currentSong = queue.currentTrack
     embed = new Discord.EmbedBuilder()
     queue.node.skipTo(num-1)

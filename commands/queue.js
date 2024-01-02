@@ -16,10 +16,10 @@ module.exports = {
 			return
 		}
 
-    const months = [':one:',':two:',':three:',':four:',':five:',':six:',':seven:',':eight:',':nine:',':keycap_ten:']
+    const emoji = [':one:',':two:',':three:',':four:',':five:',':six:',':seven:',':eight:',':nine:',':keycap_ten:']
 
     const queueString = queue.tracks.data.slice(0, 10).map((song, i) => {
-        return `${months[i]} \`${song.title}\` - [${song.duration}] - ${song.requestedBy.username}`
+        return `${emoji[i]} \`${song.title}\` - [${song.duration}] - ${song.requestedBy.username}`
     }).join("\n")
 
     const currentSong = queue.currentTrack
@@ -32,7 +32,7 @@ module.exports = {
           .setTimestamp()
           .setColor(bot.color)
       ],
-      ephemeral : !bot.player_logs
+      ephemeral : args == "dj"
     })
   }
 }

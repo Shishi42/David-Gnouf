@@ -39,8 +39,8 @@ module.exports = {
       channel = message.member.voice.channel
       url = args.get("url").value
     }
-    original_url = url
     if (!channel) return message.editReply({content: "You need to be in a Voice Channel.", ephemeral: true})
+    original_url = url
 
     if(Object.keys(bot.playlist).includes(url)){
       url = bot.playlist[url]
@@ -48,7 +48,7 @@ module.exports = {
     }
     else if (!checkLink(url)) return message.editReply({content: "URL provided is invalid.", ephemeral: true})
 
-    if ((args.source != "dj" && args.get("shuffle") && args.get("shuffle").value.toLowerCase() == "yes")) shuffle = true
+    if ((args.get("shuffle") && args.get("shuffle").value.toLowerCase() == "yes")) shuffle = true
 
     const searchResult = await player.search(url, { requestedBy: message.user })
 
@@ -58,7 +58,7 @@ module.exports = {
     } else {
       try {
         if(shuffle) searchResult.tracks = searchResult.tracks.sort(() => Math.random() - 0.5)
-        await player.play(channel, searchResult, { nodeOptions: { metadata: message } })
+        await player.play(channel, searchResult, { nodeOptions: { metadata: message, dj: args.source == "dj" }})
 
         if(Object.keys(bot.playlist).includes(original_url)){
           queue = bot.player.nodes.get(message.guildId)
@@ -84,7 +84,7 @@ module.exports = {
             .addFields({name: "Duration", value: `${searchResult.tracks[0].duration}`})
             .setThumbnail(searchResult.tracks[0].thumbnail)
         } 
-        if(bot.player_logs) await message.editReply({ embeds: [embed] })
+        await message.editReply({ embeds: [embed], ephemeral : args.source == "dj" })
       } catch (e) {
           return message.followUp(`Something went wrong: ${e}`)
       }

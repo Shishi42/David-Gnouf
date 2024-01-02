@@ -48,6 +48,6 @@ module.exports = {
         .setFooter({text: `Song requested by ${currentSong.requestedBy.username}`, iconURL: `${currentSong.requestedBy.displayAvatarURL({dynamic: true})}`})
     }
 
-    await message.reply({ embeds: [embed], ephemeral : !bot.player_logs})
+    await message.reply({ embeds: [embed], ephemeral : args == "dj"})
   }
 }

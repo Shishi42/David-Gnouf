@@ -12,5 +12,5 @@ module.exports = async (bot, queue, track) => {
     .setFooter({text: `Song requested by ${track.requestedBy.username}`, iconURL: `${track.requestedBy.displayAvatarURL({dynamic: true})}`})
   if(track.playlist) embed.addFields({name: "Playlist", value: `${track.playlist.title}`})
 
-  if(bot.player_logs) queue.metadata.channel.send({ embeds: [embed] })
+  if(queue.source != "dj") queue.metadata.channel.send({ embeds: [embed] })
 }

@@ -18,10 +18,10 @@ module.exports = {
 
     if(!queue.node.isPlaying()){
       queue.node.resume()
-      await message.reply({ content: "Queue has been **resumed**.", ephemeral : !bot.player_logs})
+      await message.reply({ content: "Queue has been **resumed**.", ephemeral : args == "dj"})
     } else {
       queue.node.pause()
-      await message.reply({ content: "Queue has been **paused**.", ephemeral : !bot.player_logs})
+      await message.reply({ content: "Queue has been **paused**.", ephemeral : args == "dj"})
     }
   }
 }

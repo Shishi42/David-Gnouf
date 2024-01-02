@@ -17,6 +17,6 @@ module.exports = {
 		}
 
 		queue.delete()
-    await message.reply({content : "Queue has **ended**.", ephemeral : !bot.player_logs})
+    await message.reply({content : "Queue has **ended**.", ephemeral : args == "dj"})
   }
 }

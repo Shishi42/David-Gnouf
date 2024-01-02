@@ -16,7 +16,6 @@ bot.color = "553380"
 
 bot.player = new Player(bot)
 bot.player.extractors.loadDefault()
-bot.player_logs = true
 
 bot.playlist = {
 

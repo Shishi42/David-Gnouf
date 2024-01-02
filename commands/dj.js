@@ -38,11 +38,6 @@ module.exports = {
       .setEmoji('❌')
       .setStyle(Discord.ButtonStyle.Secondary)
 
-    logs = new Discord.ButtonBuilder()
-        .setCustomId("logs")
-        .setEmoji('📖')
-        .setStyle(Discord.ButtonStyle.Secondary)
-
     channelSelect = new Discord.ChannelSelectMenuBuilder()
   			.setCustomId("channel")
   			.setPlaceholder("Select voice channel")
@@ -73,7 +68,7 @@ module.exports = {
               .setValue(url))
         )
 
-    button_row = new Discord.ActionRowBuilder().addComponents(playpause, skip, leave, logs)
+    button_row = new Discord.ActionRowBuilder().addComponents(playpause, skip, queue, leave)
     channel_row = new Discord.ActionRowBuilder().addComponents(channelSelect)
     song_row = new Discord.ActionRowBuilder().addComponents(songSelect)
     campaign_row = new Discord.ActionRowBuilder().addComponents(campaingSelect)

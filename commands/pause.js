@@ -3,7 +3,7 @@ const Discord = require("discord.js")
 module.exports = {
 
   name: "pause",
-  description: "Pause the current queue",
+  description: "Pause or resume the current queue",
   permission: null,
   dm: false,
   category: "Music",

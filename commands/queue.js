@@ -22,7 +22,9 @@ module.exports = {
         return `${emoji[i]} \`${song.title}\` - [${song.duration}] - ${song.requestedBy.username}`
     }).join("\n")
 
+    console.log("bite")
     console.log(queueString)
+    console.log("en bois")
 
     const currentSong = queue.currentTrack
     await message.reply({

@@ -27,12 +27,14 @@ module.exports = {
     console.log("en bois")
     console.log(queue.tracks.data.slice(0, 10))
 
+    queueString == "" ? res = queueString : res = ":x: \`NO OTHER SONGS IN QUEUE\`"
+
     const currentSong = queue.currentTrack
     await message.reply({
       embeds: [
         new Discord.EmbedBuilder()
           .setDescription(`**Currently Playing**\n` + (currentSong ? `\`${currentSong.title}\` - [${currentSong.duration}] - ${currentSong.requestedBy.username}` : "None"))
-          .addFields({name: "Queue", value: `${queueString}`})
+          .addFields({name: "Queue", value: `${res}`})
           .setFooter({text: `Requested by ${message.user.username}`, iconURL: `${message.user.displayAvatarURL({dynamic: true})}`})
           .setTimestamp()
           .setColor(bot.color)

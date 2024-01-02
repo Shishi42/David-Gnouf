@@ -86,7 +86,7 @@ module.exports = {
             .setThumbnail(searchResult.tracks[0].thumbnail)
         } 
         if(args.source != "dj") await message.editReply({ embeds: [embed] })
-        else await message.deleteReply(})
+        else await message.deleteReply()
       } catch (e) {
           return message.followUp(`Something went wrong: ${e}`)
       }

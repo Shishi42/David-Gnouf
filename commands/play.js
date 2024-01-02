@@ -27,6 +27,7 @@ module.exports = {
 
   async run(bot, message, args) {
 
+    await message.deferReply()
     const player = useMainPlayer()
 
     shuffle = false
@@ -36,7 +37,6 @@ module.exports = {
       url = args.url[0]
       message.dj = true
     } else {
-      await message.deferReply()
       channel = message.member.voice.channel
       url = args.get("url").value
     }
@@ -86,6 +86,7 @@ module.exports = {
             .setThumbnail(searchResult.tracks[0].thumbnail)
         } 
         if(args.source != "dj") await message.editReply({ embeds: [embed] })
+        else await message.deleteReply(})
       } catch (e) {
           return message.followUp(`Something went wrong: ${e}`)
       }

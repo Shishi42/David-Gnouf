@@ -13,7 +13,7 @@ module.exports = {
     embed = new Discord.EmbedBuilder()
       .setColor(bot.color)
       .setTitle("DJ Menu")
-      .setDescription(":play_pause: : Play/Pause\n:arrow_right: : Skip\n:arrow_double_down: : Queue\n:x: : Leave)
+      .setDescription(":play_pause: : Play/Pause\n:arrow_right: : Skip\n:arrow_double_down: : Queue\n:x: : Leave")
       .setThumbnail(bot.user.displayAvatarURL({dynamic: true}))
       .setTimestamp()
       .setFooter({text: `Requested by ${message.user.username}`, iconURL: `${message.user.displayAvatarURL({dynamic: true})}`})

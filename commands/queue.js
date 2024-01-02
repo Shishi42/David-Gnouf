@@ -21,7 +21,8 @@ module.exports = {
     const queueString = queue.tracks.data.slice(0, 10).map((song, i) => {
         return `${emoji[i]} \`${song.title}\` - [${song.duration}] - ${song.requestedBy.username}`
     }).join("\n")
-    queueString == "" ? res = queueString : res = ":x: \`NO OTHER SONGS IN QUEUE\`"
+    queueString ? res = queueString : res = ":x: \`NO OTHER SONGS IN QUEUE\`"
+    console.log(if(queueString))
 
     const currentSong = queue.currentTrack
     await message.reply({

@@ -26,9 +26,9 @@ module.exports = {
 		}
 
     if(args && args != "dj" && args.get("number") && isNaN(args.get("number").value)) return message.reply({content: "The number of skip you provided is invalid.", ephemeral: true})
-    if(args && args != "dj" args.get("number") && parseInt(args.get("number").value) >= queue.tracks.data.length) return message.reply({content: `The number of skip you provided is greater than the number of songs in the queue :arrow_right: **${queue.tracks.data.length}** songs.`, ephemeral: true})
+    if(args && args != "dj" && args.get("number") && parseInt(args.get("number").value) >= queue.tracks.data.length) return message.reply({content: `The number of skip you provided is greater than the number of songs in the queue :arrow_right: **${queue.tracks.data.length}** songs.`, ephemeral: true})
 
-    args && args != "dj" args.get("number") ? num = parseInt(args.get("number").value) : num = 1
+    args && args != "dj" && args.get("number") ? num = parseInt(args.get("number").value) : num = 1
 
     const currentSong = queue.currentTrack
     embed = new Discord.EmbedBuilder()

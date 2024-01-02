@@ -21,12 +21,6 @@ module.exports = {
     const queueString = queue.tracks.data.slice(0, 10).map((song, i) => {
         return `${emoji[i]} \`${song.title}\` - [${song.duration}] - ${song.requestedBy.username}`
     }).join("\n")
-
-    console.log("bite")
-    console.log(queueString)
-    console.log("en bois")
-    console.log(queue.tracks.data.slice(0, 10))
-
     queueString == "" ? res = queueString : res = ":x: \`NO OTHER SONGS IN QUEUE\`"
 
     const currentSong = queue.currentTrack

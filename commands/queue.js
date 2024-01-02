@@ -25,6 +25,7 @@ module.exports = {
     console.log("bite")
     console.log(queueString)
     console.log("en bois")
+    console.log(queue.tracks.data.slice(0, 10))
 
     const currentSong = queue.currentTrack
     await message.reply({

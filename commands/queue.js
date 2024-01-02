@@ -22,7 +22,8 @@ module.exports = {
         return `${emoji[i]} \`${song.title}\` - [${song.duration}] - ${song.requestedBy.username}`
     }).join("\n")
     queueString ? res = queueString : res = ":x: \`NO OTHER SONGS IN QUEUE\`"
-    console.log(if(queueString))
+    if(queueString) console.log('OUI')
+    else console.log('NON')
 
     const currentSong = queue.currentTrack
     await message.reply({

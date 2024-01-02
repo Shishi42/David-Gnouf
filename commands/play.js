@@ -85,7 +85,7 @@ module.exports = {
             .addFields({name: "Duration", value: `${searchResult.tracks[0].duration}`})
             .setThumbnail(searchResult.tracks[0].thumbnail)
         } 
-        if(args.source == "dj") await message.editReply({ embeds: [embed] })
+        if(args.source != "dj") await message.editReply({ embeds: [embed] })
       } catch (e) {
           return message.followUp(`Something went wrong: ${e}`)
       }

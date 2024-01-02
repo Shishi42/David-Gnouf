@@ -35,6 +35,7 @@ module.exports = {
     if(args.source == "dj"){
       channel = bot.distant_channel
       url = args.url[0]
+      message.dj = true
     } else {
       channel = message.member.voice.channel
       url = args.get("url").value
@@ -58,7 +59,7 @@ module.exports = {
     } else {
       try {
         if(shuffle) searchResult.tracks = searchResult.tracks.sort(() => Math.random() - 0.5)
-        await player.play(channel, searchResult, { nodeOptions: { metadata: message, dj: args.source == "dj" }})
+        await player.play(channel, searchResult, { nodeOptions: { metadata: message }})
 
         if(Object.keys(bot.playlist).includes(original_url)){
           queue = bot.player.nodes.get(message.guildId)
@@ -84,7 +85,7 @@ module.exports = {
             .addFields({name: "Duration", value: `${searchResult.tracks[0].duration}`})
             .setThumbnail(searchResult.tracks[0].thumbnail)
         } 
-        await message.editReply({ embeds: [embed], ephemeral : args.source == "dj" })
+        if(args.source == "dj") await message.editReply({ embeds: [embed] })
       } catch (e) {
           return message.followUp(`Something went wrong: ${e}`)
       }

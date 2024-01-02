@@ -48,7 +48,7 @@ module.exports = {
     }
     else if (!checkLink(url)) return message.editReply({content: "URL provided is invalid.", ephemeral: true})
 
-    if ((args.get("shuffle") && args.get("shuffle").value.toLowerCase() == "yes")) shuffle = true
+    if ((args && args != "dj" && args.get("shuffle") && args.get("shuffle").value.toLowerCase() == "yes")) shuffle = true
 
     const searchResult = await player.search(url, { requestedBy: message.user })
 

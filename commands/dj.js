@@ -13,7 +13,7 @@ module.exports = {
       name: "channel",
       description: "The voice channel to connect to",
       required: true,
-      channel_types: Discord.ChannelType.GuildVoice,
+      channel_type: Discord.ChannelType.GuildVoice,
     },
   ],
 

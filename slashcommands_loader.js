@@ -29,8 +29,11 @@ module.exports = async bot => {
          }
       }
 
-     if(command.channel_types) slashcommand.addChannelTypes(command.channel_types)
-
+      if(command.channel_types) {
+       console.log(command.name)
+       console.log(command.channel_types)
+       slashcommand.addChannelTypes(command.channel_types)
+      }
       await commands.push(slashcommand.toJSON())
     }
   })

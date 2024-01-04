@@ -50,13 +50,6 @@ module.exports = {
       .setEmoji('❌')
       .setStyle(Discord.ButtonStyle.Secondary)
 
-    channelSelect = new Discord.ChannelSelectMenuBuilder()
-  			.setCustomId("channel")
-  			.setPlaceholder("Select voice channel")
-  			.setMinValues(1)
-  			.setMaxValues(1)
-        .addChannelTypes(Discord.ChannelType.GuildVoice)
-
     songSelect = new Discord.StringSelectMenuBuilder()
   			.setCustomId("song")
   			.setPlaceholder("Select song or playlist")
@@ -68,7 +61,8 @@ module.exports = {
               .setLabel(url)
               .setValue(url))
         )
-    campaingSelect = new Discord.StringSelectMenuBuilder()
+
+    campaignSelect = new Discord.StringSelectMenuBuilder()
   			.setCustomId("campaing_song")
   			.setPlaceholder("Select campaign song or playlist")
   			.setMinValues(1)
@@ -81,9 +75,8 @@ module.exports = {
         )
 
     button_row = new Discord.ActionRowBuilder().addComponents(playpause, skip, queue, leave)
-    channel_row = new Discord.ActionRowBuilder().addComponents(channelSelect)
     song_row = new Discord.ActionRowBuilder().addComponents(songSelect)
-    campaign_row = new Discord.ActionRowBuilder().addComponents(campaingSelect)
+    campaign_row = new Discord.ActionRowBuilder().addComponents(campaignSelect)
 
     await message.reply({ content : `Distant channel is now ${bot.channels.cache.get(bot.distant_channel)}.`, embeds: [embed], components: [button_row, song_row, campaign_row] })
   }

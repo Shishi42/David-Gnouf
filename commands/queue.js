@@ -27,7 +27,7 @@ module.exports = {
     await message.reply({
       embeds: [
         new Discord.EmbedBuilder()
-          .setDescription(`**Currently Playing**\n` + (currentSong ? `\`${currentSong.title}\` - [${currentSong.duration}] - ${currentSong.requestedBy.username}` : "None"))
+          .setDescription(`**Currently Playing**\n` + (currentSong ? `:arrow_forward: \`${currentSong.title}\` - [${currentSong.duration}] - ${currentSong.requestedBy.username}` : "None"))
           .addFields({name: "Queue", value: `${res}`})
           .setFooter({text: `Requested by ${message.user.username}`, iconURL: `${message.user.displayAvatarURL({dynamic: true})}`})
           .setTimestamp()

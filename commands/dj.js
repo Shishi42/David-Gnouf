@@ -14,7 +14,7 @@ module.exports = {
       description: "The voice channel to connect to",
       required: true,
       autocomplete: true,
-      channel_types: [2],
+      channel_types: 2,
     }
   ],
 

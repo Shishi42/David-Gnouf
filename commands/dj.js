@@ -19,7 +19,7 @@ module.exports = {
 
   async run(bot, message, args) {
 
-    bot.distant_channel = args.get(channel)
+    bot.distant_channel = args.get("channel").value
     await interaction.reply({content : `Distant channel is now ${bot.channels.cache.get(bot.distant_channel)}.`, ephemeral : true})
 
     embed = new Discord.EmbedBuilder()

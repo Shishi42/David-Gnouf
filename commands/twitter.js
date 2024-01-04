@@ -11,7 +11,7 @@ module.exports = {
     {
       type: "string",
       name: "end_link",
-      description: "The links to beautified",
+      description: "The links to beautify",
       required: true,
       autocomplete: false,
     }

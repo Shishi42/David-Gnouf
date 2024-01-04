@@ -20,7 +20,6 @@ module.exports = {
   async run(bot, message, args) {
 
     bot.distant_channel = args.get("channel").value
-    await message.reply({content : `Distant channel is now ${bot.channels.cache.get(bot.distant_channel)}.`, ephemeral : true})
 
     embed = new Discord.EmbedBuilder()
       .setColor(bot.color)
@@ -85,6 +84,6 @@ module.exports = {
     song_row = new Discord.ActionRowBuilder().addComponents(songSelect)
     campaign_row = new Discord.ActionRowBuilder().addComponents(campaingSelect)
 
-    await message.reply({ embeds: [embed], components: [button_row, song_row, campaign_row] })
+    await message.reply({ content : `Distant channel is now ${bot.channels.cache.get(bot.distant_channel)}.`, embeds: [embed], components: [button_row, song_row, campaign_row] })
   }
 }

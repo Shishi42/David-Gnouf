@@ -5,10 +5,22 @@ module.exports = {
   name: "dj",
   description: "Send DJ menu",
   permission: null,
-  dm: true,
+  dm: false,
   category: "Music",
+  options: [
+    {
+      type: "channel",
+      name: "channel",
+      description: "The voice channel to connect to",
+      required: true,
+      autocomplete: true,
+    }
+  ],
 
   async run(bot, message, args) {
+
+    bot.distant_channel = args.get(channel)
+    await interaction.reply({content : `Distant channel is now ${bot.channels.cache.get(bot.distant_channel)}.`, ephemeral : true})
 
     embed = new Discord.EmbedBuilder()
       .setColor(bot.color)
@@ -73,6 +85,6 @@ module.exports = {
     song_row = new Discord.ActionRowBuilder().addComponents(songSelect)
     campaign_row = new Discord.ActionRowBuilder().addComponents(campaingSelect)
 
-    await message.reply({ embeds: [embed], components: [button_row, channel_row, song_row, campaign_row], ephemeral : true })
+    await message.reply({ embeds: [embed], components: [button_row, song_row, campaign_row] })
   }
 }

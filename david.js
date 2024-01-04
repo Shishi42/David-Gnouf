@@ -64,6 +64,7 @@ fs.readdirSync("./events/").filter(f => !f.startsWith(".")).forEach(async file =
   bot.on(file.split(".js").join(""), event.bind(null, bot))
 })
 bot.player.events.on("playerStart", require(`./events/.playerStart.js`).bind(null, bot))
+bot.player.events.on("queueDestroy", require(`./events/.queueDestroy.js`).bind(null, bot))
 
 if(fs.existsSync("./event.json")){
   bot.eventjson = jsonfile.readFileSync("./event.json")

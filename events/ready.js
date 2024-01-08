@@ -49,7 +49,7 @@ module.exports = async bot => {
 
   bot.db = new Sequelize({
     dialect: "sqlite",
-    storage: "../sleep.db"
+    storage: "./sleep.db"
   })
 
   bot.Pokemons = bot.db.define("pokemon", {
@@ -185,7 +185,7 @@ module.exports = async bot => {
   await bot.Subskills.sync()
   await bot.Natures.sync()
 
-  if(!fs.existsSync("../sleep.db")) await require("../db_load.js").run(bot)
+  if(!fs.existsSync("./sleep.db")) await require("../db_load.js").run(bot)
   console.log("Database Online.")
 
   await slashcommands_loader(bot)

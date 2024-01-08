@@ -185,10 +185,7 @@ module.exports = async bot => {
   await bot.Subskills.sync()
   await bot.Natures.sync()
 
-  console.log("ya pas db ?")
-  console.log(!fs.existsSync("./sleep.db"))
-
-  if(!fs.existsSync("./sleep.db")) await require("../db_load.js").run(bot)
+  if(!await bot.Pokemons.findOne()) await require("../db_load.js").run(bot)
   console.log("Database Online.")
 
   await slashcommands_loader(bot)

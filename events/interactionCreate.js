@@ -33,7 +33,6 @@ module.exports = async (bot, interaction) => {
     if(filtered.length > 20) filtered = filtered.slice(0, 20)
     if(interaction.commandName !== "poke-judge") await interaction.respond(filtered.map(choice => ({ name: choice, value: choice })))
     else await interaction.respond(filtered.map(choice => ({ name: choice, value: choice.split('(')[0].slice(0, -1)})))
-    }
   }
 
   if(interaction.type === Discord.InteractionType.MessageComponent && interaction.isButton()) {

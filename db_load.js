@@ -4,10 +4,6 @@ module.exports = {
 
   async run(bot) {
 
-    dict = {
-
-    }
-
     skills = [
       ["Dream Shard Magnet S","Aimant à Fragment de Rêve S","-2","-2"],
       ["Dream Shard Magnet S - Var","Aimant à Fragment de Rêve S - Var","-2","-2"],
@@ -79,7 +75,7 @@ module.exports = {
       ["Skills","Compétences"]
     ]
 
-    pokemon1 = [
+    pokemons = [
       ["Bulbizarre","Ingrédients","Aiment à Ingrédient S","C+"],
       ["Herbizarre","Ingrédients","Aiment à Ingrédient S","B"],
       ["Florizarre","Ingrédients","Aiment à Ingrédient S","A-"],
@@ -200,40 +196,40 @@ module.exports = {
       ["Blizzaroi","Ingrédients","Charge de Puissance S - Var","?"]
     ]
 
-    pokemon2 = ["Bulbasaur","Ivysaur","Venusaur","Charmander","Charmeleon","Charizard","Squirtle","Wartortle","Blastoise","Caterpie","Metapod","Butterfree","Rattata","Raticate","Ekans","Arbok","Pichu","Pikachu","Raichu","Cleffa","Clefairy","Clefable","Igglybuff","Jigglypuff","Wigglytuff","Diglett","Dugtrio","Meowth","Persian","Psyduck","Golduck","Mankey","Primeape","Growlithe","Arcanine","Bellsprout","Weepinbell","Victreebel","Geodude","Graveler","Golem","Slowpoke","Slowbro","Slowking","Magnemite","Magneton","Magnezone","Doduo","Dodrio","Gastly","Haunter","Gengar","Onix","Steelix","Cubone","Marowak","Kangaskhan","Mime Jr.","Mr. Mime","Pinsir","Ditto","Eevee","Vaporeon","Jolteon","Flareon","Espeon","Umbreon","Leafeon","Glaceon","Sylveon","Chikorita","Bayleef","Meganium","Cyndaquil","Quilava","Typhlosion","Totodile","Croconaw","Feraligatr","Togepi","Togetic","Togekiss","Mareep","Flaaffy","Ampharos","Bonsly","Sudowoodo","Wynaut","Wobbuffet","Heracross","Houndour","Houndoom","Larvitar","Pupitar","Tyranitar","Slakoth","Vigoroth","Slaking","Sableye","Gulpin","Swalot","Swablu","Altaria","Shuppet","Banette","Absol","Spheal","Sealeo","Walrein","Riolu","Lucario","Croagunk","Toxicroak","Pikachu - Halloween","Pikachu - Christmas","Delibird","Snover","Abomasnow"]
+    pokemon_english = ["Bulbasaur","Ivysaur","Venusaur","Charmander","Charmeleon","Charizard","Squirtle","Wartortle","Blastoise","Caterpie","Metapod","Butterfree","Rattata","Raticate","Ekans","Arbok","Pichu","Pikachu","Raichu","Cleffa","Clefairy","Clefable","Igglybuff","Jigglypuff","Wigglytuff","Diglett","Dugtrio","Meowth","Persian","Psyduck","Golduck","Mankey","Primeape","Growlithe","Arcanine","Bellsprout","Weepinbell","Victreebel","Geodude","Graveler","Golem","Slowpoke","Slowbro","Slowking","Magnemite","Magneton","Magnezone","Doduo","Dodrio","Gastly","Haunter","Gengar","Onix","Steelix","Cubone","Marowak","Kangaskhan","Mime Jr.","Mr. Mime","Pinsir","Ditto","Eevee","Vaporeon","Jolteon","Flareon","Espeon","Umbreon","Leafeon","Glaceon","Sylveon","Chikorita","Bayleef","Meganium","Cyndaquil","Quilava","Typhlosion","Totodile","Croconaw","Feraligatr","Togepi","Togetic","Togekiss","Mareep","Flaaffy","Ampharos","Bonsly","Sudowoodo","Wynaut","Wobbuffet","Heracross","Houndour","Houndoom","Larvitar","Pupitar","Tyranitar","Slakoth","Vigoroth","Slaking","Sableye","Gulpin","Swalot","Swablu","Altaria","Shuppet","Banette","Absol","Spheal","Sealeo","Walrein","Riolu","Lucario","Croagunk","Toxicroak","Pikachu - Halloween","Pikachu - Christmas","Delibird","Snover","Abomasnow"]
 
-    skills.forEach((item, i) => {
+    skills.forEach((skill, i) => {
       bot.Skills.create({
         skill_id: i,
-        skill_nom: item[1],
-        skill_name: item[0],
-        skill_tier_early: item[2],
-        skill_tier_late: item[3],
+        skill_nom: skill[1],
+        skill_name: skill[0],
+        skill_tier_early: skill[2],
+        skill_tier_late: skill[3],
       })
     })
 
-    subskills.forEach((item, i) => {
+    subskills.forEach((subskill, i) => {
       bot.Subskills.create({
         subskill_id: i,
-        subskill_nom: item[1],
-        subskill_name: item[0],
+        subskill_nom: subskill[1],
+        subskill_name: subskill[0],
       })
     })
 
-    natures.forEach((item, i) => {
+    natures.forEach((nature, i) => {
 
-      if(item[2] == ""){
+      if(nature[2] == ""){
         fr = ["",""]
         en = ["",""]
       } else {
-        fr = item[3].split(',')
-        en = item[2].split(',')
+        fr = nature[3].split(',')
+        en = nature[2].split(',')
       }
 
       bot.Natures.create({
         nature_id: i,
-        nature_nom: item[0],
-        nature_name: item[1],
+        nature_nom: nature[0],
+        nature_name: nature[1],
         nature_incr_fr: fr[0],
         nature_incr_en: en[0],
         nature_decr_fr: fr[1],
@@ -241,26 +237,26 @@ module.exports = {
       })
     })
 
-    types.forEach((item, i) => {
+    types.forEach((type, i) => {
       bot.Types.create({
         type_id: i,
-        type_nom: item[1],
-        type_name: item[0],
+        type_nom: type[1],
+        type_name: type[0],
       })
     })
 
-    pokemon1.forEach((item, i) => {
+    pokemons.forEach((pokemon, i) => {
 
-      type_id = types.findIndex(x => x.includes(item[1]))
-      skill_id = skills.findIndex(x => x.includes(item[2]))
+      type_id = types.findIndex(x => x.includes(pokemon[1]))
+      skill_id = skills.findIndex(x => x.includes(pokemon[2]))
 
       bot.Pokemons.create({
         pokemon_id: i,
-        pokemon_nom: item[0],
-        pokemon_name: pokemon2[i],
+        pokemon_nom: pokemon[0],
+        pokemon_name: pokemon_english[i],
         type_id: type_id,
         skill_id: skill_id,
-        pokemon_tier: item[3],
+        pokemon_tier: pokemon[3],
       })
     })
   }

@@ -27,14 +27,11 @@ module.exports = async bot => {
         }
     }
 
-    if(command.channel_types) {
-      slashcommand.addChannelTypes(command.channel_types)
-    }
     await commands.push(slashcommand.toJSON())
   })
 
   const rest = new REST({version: "10"}).setToken(bot.token)
 
   const data = await rest.put(Routes.applicationCommands(bot.user.id),{ body: commands },)
-  console.log(`Successfully reloaded ${data.length} application (/) commands.`)
+  console.log(`Successfully reloaded ${data.length} (/) commands.`)
 }

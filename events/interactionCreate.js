@@ -35,23 +35,13 @@ module.exports = async (bot, interaction) => {
     else await interaction.respond(filtered.map(choice => ({ name: choice, value: choice.split('(')[0].slice(0, -1)})))
   }
 
-  if(interaction.type === Discord.InteractionType.MessageComponent && interaction.isButton()) {
+  if(interaction.type === Discord.InteractionType.MessageComponent) {
     if(interaction.customId === 'playpause') require(`../commands/pause.js`).run(bot, interaction, "dj")
     if(interaction.customId === 'skip') require(`../commands/skip.js`).run(bot, interaction, "dj")
     if(interaction.customId === 'queue') require(`../commands/queue.js`).run(bot, interaction, "dj")
     if(interaction.customId === 'leave') require(`../commands/end.js`).run(bot, interaction, "dj")
-  }
-
-  if(interaction.type === Discord.InteractionType.MessageComponent && interaction.isAnySelectMenu()) {
-    if(interaction.customId === 'channel'){
-      bot.distant_channel = interaction.values[0]
-      await interaction.reply({content : `Distant channel is now ${bot.channels.cache.get(bot.distant_channel)}.`, ephemeral : true})
-    }
     if(interaction.customId.includes('song')) require(`../commands/play.js`).run(bot, interaction, {url : interaction.values, source : "dj"})
   }
 
-  if(interaction.type === Discord.InteractionType.ApplicationCommand) {
-   let command = require(`../commands/${interaction.commandName}`)
-   command.run(bot, interaction, interaction.options)
-  }
+  if(interaction.type === Discord.InteractionType.ApplicationCommand) { require(`../commands/${interaction.commandName}`).run(bot, interaction, interaction.options) }
 }

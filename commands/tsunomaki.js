@@ -9,7 +9,7 @@ module.exports = {
   category: "Simp",
 
   async run(bot, message, args) {
-
+    
     function sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms))
     }
@@ -25,36 +25,28 @@ module.exports = {
 
     for(let i = 0; i < 4; i++){
       msg+="Tsunomaki, Tsunomaki\n"
-    await message.editReply(msg)
+      await message.editReply(msg)
       await sleep(1000)
     }
 
-    msg2 = "TSU\n"
-    await message.editReply(msg+msg2)
+    await message.editReply(msg+"TSU\n")
     await sleep(200)
 
-    msg2 = "TSU NO\n"
-    await message.editReply(msg+msg2)
+    await message.editReply(msg+"TSU NO\n")
     await sleep(200)
 
-    msg2 = "TSU NO MA\n"
-    await message.editReply(msg+msg2)
+    await message.editReply(msg+"TSU NO MA\n")
     await sleep(200)
 
-    msg2 = "TSU NO MA KI\n"
-    await message.editReply(msg+msg2)
+    await message.editReply(msg+"TSU NO MA KI\n")
     await sleep(200)
 
-    msg2 = "TSU NO MA KI : JAN"
-    await message.editReply(msg+msg2)
+    await message.editReply(msg+"TSU NO MA KI : JAN")
     await sleep(200)
 
-    msg2 = "TSU NO MA KI : JANKEN"
-    await message.editReply(msg+msg2)
+    await message.editReply(msg+"TSU NO MA KI : JANKEN")
     await sleep(100)
 
-    msg2 = `TSU NO MA KI : JANKENPON ${emoji_array[Math.floor(Math.random() * Math.floor(3))]}\n`
-    await message.editReply(msg+msg2)
-
+    return await message.editReply(msg+`TSU NO MA KI : JANKENPON ${emoji_array[Math.floor(Math.random() * Math.floor(3))]}\n`)
   }
 }

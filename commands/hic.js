@@ -9,6 +9,6 @@ module.exports = {
   category: "Simp",
 
   async run(bot, message, args) {
-    await message.reply('<:hhh2:841350350668955678><:iii:841350350258438150><:ccc:841350350543126579>')
+    return await message.reply('<:hhh2:841350350668955678><:iii:841350350258438150><:ccc:841350350543126579>')
   }
 }

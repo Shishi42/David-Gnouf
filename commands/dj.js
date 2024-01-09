@@ -6,7 +6,7 @@ module.exports = {
   description: "Send DJ menu",
   permission: null,
   dm: false,
-  category: "Music",
+  category: "DnD",
   options: [
     {
       type: "channel",
@@ -78,6 +78,6 @@ module.exports = {
     song_row = new Discord.ActionRowBuilder().addComponents(songSelect)
     campaign_row = new Discord.ActionRowBuilder().addComponents(campaignSelect)
 
-    await message.reply({ content : `Distant channel is now ${bot.channels.cache.get(bot.distant_channel)}.`, embeds: [embed], components: [button_row, song_row, campaign_row] })
+    return await message.reply({ content : `Distant channel is now ${bot.channels.cache.get(bot.distant_channel)}.`, embeds: [embed], components: [button_row, song_row, campaign_row] })
   }
 }

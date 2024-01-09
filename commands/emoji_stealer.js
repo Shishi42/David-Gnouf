@@ -19,19 +19,13 @@ module.exports = {
 
   async run(bot, message, args) {
 
-    regex = new RegExp("<[a]{0,1}:.*[a-z]:.*[0-9]>")
-    if(!regex.test(args.get("emoji").value)) return message.reply({content: "Emoji provided is invalid.", ephemeral: true})
+    if(!new RegExp("<[a]{0,1}:.*[a-z]:.*[0-9]>").test(args.get("emoji").value)) return message.reply({content: "Emoji provided is invalid.", ephemeral: true})
 
     emoji = args.get("emoji").value.split(':')
-    name = emoji[1]
-    id = emoji[2].slice(0, -1)
 
-    extension = emoji[0].includes('a') ? "gif" : "png"
-
-    message.guild.emojis.create({ attachment: `https://cdn.discordapp.com/emojis/${id}.${extension}`, name: name })
+    return message.guild.emojis.create({ attachment: `https://cdn.discordapp.com/emojis/${emoji[2].slice(0, -1)}.${emoji[0].includes('a') ? "gif" : "png"}`, name: emoji[1] })
       .then(emoji => message.reply({content: `Emoji **${emoji.name}** successfully stolen. ${emoji}`, ephemeral: true}))
       .catch(e => message.reply({content: "Couldn't add emoji to the server.", ephemeral: true}))
 
-    // await message.reply('https://www.google.fr/search?q='+args.get("search").value.split(" ").join('+'))
   }
 }

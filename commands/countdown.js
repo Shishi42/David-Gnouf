@@ -11,11 +11,11 @@ module.exports = {
 
   async run(bot, message, args) {
 
-    await message.deferReply()
-
     function sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms))
     }
+
+    await message.deferReply()
 
     if(message.member.voice.channel){
 
@@ -37,12 +37,7 @@ module.exports = {
       await sleep(1000)
     }
 
-    if(message.member.voice.channel){
-      const connection = joinVoiceChannel({
-        channelId: message.member.voice.channel.id,
-        guildId: message.member.voice.channel.guildId,
-        adapterCreator: message.member.voice.channel.guild.voiceAdapterCreator,
-      }).destroy()
-    }
+    if(message.member.voice.channel) return connection.destroy()
   }
 }
+

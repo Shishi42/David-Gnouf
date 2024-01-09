@@ -18,6 +18,6 @@ module.exports = {
   ],
 
   async run(bot, message, args) {
-    await message.reply('https://www.google.fr/search?q='+args.get("search").value.split(" ").join('+'))
+    return await message.reply('https://www.google.fr/search?q='+args.get("search").value.split(" ").join('+'))
   }
 }

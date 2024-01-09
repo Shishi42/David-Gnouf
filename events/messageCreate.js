@@ -4,7 +4,6 @@ module.exports = async (bot, message) => {
 
   if(message.author.bot || message.channel.type === "dm") return
 
-  // prepix code
   if(message.channel.id == config.chan_prepix){
 
     if (message.content.includes("SauceNAO")){
@@ -27,7 +26,9 @@ module.exports = async (bot, message) => {
             }))
         return message.delete()
       }
-    } else if(message.content.includes("twitter") || message.content.includes("x.com")) {
+    } 
+
+    else if(message.content.includes("twitter") || message.content.includes("x.com")) {
       res = message.content.split(".com/")[1].split('?')[0].split(')')[0]
       bot.channels.fetch(config.chan_sort)
         .then(chan => chan.messages.fetch()
@@ -36,7 +37,9 @@ module.exports = async (bot, message) => {
             bot.channels.cache.get(config.chan_sort).send(res)
           }))
       return message.delete()
-    } else if (message.content.includes("artworks")){
+    }
+    
+    else if (message.content.includes("artworks")){
       res = message.content.split("artworks/")[1].split(')')[0]
       bot.channels.fetch(config.chan_artworks)
         .then(chan => chan.messages.fetch()
@@ -45,7 +48,9 @@ module.exports = async (bot, message) => {
             bot.channels.cache.get(config.chan_artworks).send(res)
           }))
       return message.delete()
-    } else if (message.content.includes("users")){
+    }
+    
+    else if (message.content.includes("users")){
       res = message.content.split("users/")[1].split(')')[0]
       bot.channels.fetch(config.chan_users)
         .then(chan => chan.messages.fetch()
@@ -55,15 +60,5 @@ module.exports = async (bot, message) => {
           }))
       return message.delete()
     }
-  }
-
-  // say command code
-  if(message.content.startsWith("!say")){
-    let args = message.content.split(' ').slice(1)
-
-    if(args.length != 0){
-      message.channel.send(args.join(' '))
-    }
-    return message.delete()
   }
 }

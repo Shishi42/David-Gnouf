@@ -9,6 +9,6 @@ module.exports = {
   category: "Simp",
 
   async run(bot, message, args) {
-    await message.reply('<:rightglow:841350350580482048><:pat:841350350534475807><:leftglow:841350350493450290>')
+    return await message.reply('<:rightglow:841350350580482048><:pat:841350350534475807><:leftglow:841350350493450290>')
   }
 }

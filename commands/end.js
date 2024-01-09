@@ -11,12 +11,9 @@ module.exports = {
   async run(bot, message, args) {
     const queue = bot.player.nodes.get(message.guildId)
 
-		if (!queue){
-			await message.reply({content: "There are **no songs** in the queue.", ephemeral: true})
-			return
-		}
+		if (!queue) return await message.reply({content: "There are **no songs** in the queue.", ephemeral: true})
 
 		queue.delete()
-    await message.reply({content : "Queue has **ended**.", ephemeral : args == "dj"})
+    return await message.reply({content : "Queue has **ended**.", ephemeral : args == "dj"})
   }
 }

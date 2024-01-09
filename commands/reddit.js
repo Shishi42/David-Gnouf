@@ -3,7 +3,7 @@ const Discord = require("discord.js")
 module.exports = {
 
   name: "reddit",
-  description: "Send beautified reddit post link",
+  description: "Send beautified reddit link",
   permission: null,
   dm: true,
   category: "Utility",
@@ -18,6 +18,6 @@ module.exports = {
   ],
 
   async run(bot, message, args) {
-    await message.reply('https://redd.it/'+args.get("link").value.split('/')[6])
+    return await message.reply('https://redd.it/'+args.get("link").value.split('/')[6])
   }
 }

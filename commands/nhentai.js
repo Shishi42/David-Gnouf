@@ -18,6 +18,6 @@ module.exports = {
   ],
 
   async run(bot, message, args) {
-    await message.reply('https://www.nhentai.net/g/'+args.get("number").value)
+    return await message.reply('https://www.nhentai.net/g/'+args.get("number").value)
   }
 }

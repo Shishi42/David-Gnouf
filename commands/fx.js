@@ -19,11 +19,8 @@ module.exports = {
 
   async run(bot, message, args) {
 
-    if(!args.get("link").value.startsWith("https://twitter.com") && !args.get("link").value.startsWith("https://x.com")) message.reply({content: `Link provided is not from Twitter / X.`, ephemeral: true})
+    if(!args.get("link").value.startsWith("https://twitter.com") && !args.get("link").value.startsWith("https://x.com")) return message.reply({content: `Link provided is not from Twitter / X.`, ephemeral: true})
 
-    else {
-      res = args.get("link").value.split(".com/")[1].split("?")[0]
-      message.reply(`https://fxtwitter.com/${res}`)
-    }
+    return await message.reply(`https://fxtwitter.com/${args.get("link").value.split(".com/")[1].split("?")[0]}`)
   }
 }

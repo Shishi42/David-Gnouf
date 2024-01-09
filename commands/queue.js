@@ -11,20 +11,16 @@ module.exports = {
   async run(bot, message, args) {
     const queue = bot.player.nodes.get(message.guildId)
 
-		if (!queue || !queue.node.isPlaying()){
-			await message.reply({content: "There are **no songs** in the queue.", ephemeral: true})
-			return
-		}
+		if (!queue || !queue.node.isPlaying()) return await message.reply({content: "There are **no songs** in the queue.", ephemeral: true})
 
     const emoji = [':one:',':two:',':three:',':four:',':five:',':six:',':seven:',':eight:',':nine:',':keycap_ten:']
-
     const queueString = queue.tracks.data.slice(0, 10).map((song, i) => {
         return `${emoji[i]} \`${song.title}\` - [${song.duration}] - ${song.requestedBy.username}`
     }).join("\n")
     queueString ? res = queueString : res = ":x: `NO OTHER SONGS IN QUEUE`"
 
     const currentSong = queue.currentTrack
-    await message.reply({
+    return await message.reply({
       embeds: [
         new Discord.EmbedBuilder()
           .setDescription(`**Currently Playing**\n` + (currentSong ? `:arrow_forward: \`${currentSong.title}\` - [${currentSong.duration}] - ${currentSong.requestedBy.username}` : "None"))

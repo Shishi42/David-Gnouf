@@ -3,7 +3,7 @@ const Discord = require("discord.js")
 module.exports = {
 
   name: "fgo",
-  description: "Compute FGO number of possible summon",
+  description: "Compute the number of possible summon on FGO",
   permission: null,
   dm: true,
   category: "Utility",
@@ -11,14 +11,14 @@ module.exports = {
     {
       type: "string",
       name: "quartz",
-      description: "Your number of Quartz",
+      description: "The number of Quartz you own",
       required: true,
       autocomplete: false,
     },
     {
       type: "string",
       name: "ticket",
-      description: "Your number of Summon Tickets",
+      description: "The number of Summon Tickets you own",
       required: true,
       autocomplete: false,
     }

@@ -19,6 +19,6 @@ module.exports = {
      return `${days.padStart(1, '0')} days, ${hrs.padStart(2, '0')} hours, ${min.padStart(2, '0')} minutes, ${sec.padStart(2, '0')} seconds.`
     }
 
-  	await message.reply(`Online since \`${duration(bot.uptime)}\``)
+  	return await message.reply(`Online since \`${duration(bot.uptime)}\``)
   }
 }

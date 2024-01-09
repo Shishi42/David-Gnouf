@@ -3,7 +3,7 @@ const Discord = require("discord.js")
 module.exports = {
 
   name: "poll",
-  description: "React to a message with poll emoji",
+  description: "React to a message with poll emojis",
   permission: null,
   dm: true,
   category: "Utility",
@@ -28,6 +28,6 @@ module.exports = {
         msg.react("❌")})
       .catch((error) => {return message.editReply({content: "Message with this id not found.", ephemeral: true})})
 
-    await message.editReply({content: "Done.", ephemeral: true})
+    return await message.editReply({content: "Done.", ephemeral: true})
   }
 }

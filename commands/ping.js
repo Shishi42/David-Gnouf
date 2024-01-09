@@ -9,7 +9,6 @@ module.exports = {
   category: "Utility",
 
   async run(bot, message, args) {
-    let ping = Date.now() - message.createdTimestamp
-    await message.reply(`BOT ping : \`${ping}\`, API ping : \`${Math.round(bot.ws.ping)}\``)
+    return await message.reply(`BOT ping : \`${Date.now() - message.createdTimestamp}\`, API ping : \`${Math.round(bot.ws.ping)}\``)
   }
 }

@@ -19,7 +19,7 @@ module.exports = {
 
     if(message.member.voice.channel){
 
-      connection = joinVoiceChannel({
+      const connection = joinVoiceChannel({
         channelId: message.member.voice.channel.id,
         guildId: message.member.voice.channel.guildId,
         adapterCreator: message.member.voice.channel.guild.voiceAdapterCreator,

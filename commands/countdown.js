@@ -25,7 +25,7 @@ module.exports = {
         adapterCreator: message.member.voice.channel.guild.voiceAdapterCreator,
       })
 
-      player = createAudioPlayer().play(createAudioResource("./5s_countdown.mp3"))
+      const player = createAudioPlayer().play(createAudioResource("./5s_countdown.mp3"))
       connection.subscribe(player)
     }
 

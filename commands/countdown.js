@@ -19,14 +19,13 @@ module.exports = {
 
     if(message.member.voice.channel){
 
-      const connection = joinVoiceChannel({
+      connection = joinVoiceChannel({
         channelId: message.member.voice.channel.id,
         guildId: message.member.voice.channel.guildId,
         adapterCreator: message.member.voice.channel.guild.voiceAdapterCreator,
       })
 
-      const player = createAudioPlayer()
-      player.play(createAudioResource("./5s_countdown.mp3"))
+      player = createAudioPlayer().play(createAudioResource("./5s_countdown.mp3"))
       connection.subscribe(player)
     }
 
@@ -37,7 +36,14 @@ module.exports = {
       await sleep(1000)
     }
 
-    if(message.member.voice.channel) return connection.destroy()
+    if(message.member.voice.channel){
+
+      return joinVoiceChannel({
+        channelId: message.member.voice.channel.id,
+        guildId: message.member.voice.channel.guildId,
+        adapterCreator: message.member.voice.channel.guild.voiceAdapterCreator,
+      }).destroy()
+    }
   }
 }
 

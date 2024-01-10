@@ -18,6 +18,7 @@ module.exports = {
   ],
 
   async run(bot, message, args) {
+    await message.deferReply()
     await message.followUp(args.get("say").value)
     return message.delete()
   }

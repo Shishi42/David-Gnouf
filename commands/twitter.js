@@ -18,8 +18,6 @@ module.exports = {
   ],
 
   async run(bot, message, args) {
-    res = args.get("end_link").value.split(' ').map((url) => `https://twitter.com/${url}`).join('\n')
-    console.log(res)
-    return await message.reply(res)
+    return await message.reply(args.get("end_link").value.split(' ').map((url) => `https://twitter.com/${url}`).join('\n'))
   }
 }

@@ -18,8 +18,7 @@ module.exports = {
   ],
 
   async run(bot, message, args) {
-    await message.deferReply()
-    await message.followUp(args.get("say").value)
-    return message.delete()
+    await message.channel.send(args.get("say").value)
+    return await message.reply({content: "Done.", ephemeral: true})
   }
 }

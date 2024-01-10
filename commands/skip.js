@@ -20,20 +20,18 @@ module.exports = {
   async run(bot, message, args) {
     const queue = bot.player.nodes.get(message.guildId)
 
-		if (!queue){
-			await message.reply({content: "There are **no songs** in the queue.", ephemeral: true})
-			return
-		}
+		if (!queue) return await message.reply({content: "There are **no songs** in the queue.", ephemeral: true})
 
-    if(args && args != "dj" && args.get("number") && isNaN(args.get("number").value)) return message.reply({content: "The number of skip you provided is invalid.", ephemeral: true})
-    if(args && args != "dj" && args.get("number") && parseInt(args.get("number").value) >= queue.tracks.data.length) return message.reply({content: `The number of skip you provided is greater than the number of songs in the queue :arrow_right: **${queue.tracks.data.length}** songs.`, ephemeral: true})
+    if(args != "dj" && args?.get("number") && isNaN(args.get("number").value)) return message.reply({content: "The number of skip you provided is invalid.", ephemeral: true})
+    if(args != "dj" && args?.get("number") && parseInt(args.get("number").value) >= queue.tracks.data.length) return message.reply({content: `The number of skip you provided is greater than the number of songs in the queue :arrow_right: **${queue.tracks.data.length}** songs.`, ephemeral: true})
 
-    args && args != "dj" && args.get("number") ? num = parseInt(args.get("number").value) : num = 1
+    args != "dj" && args?.get("number") ? num = parseInt(args.get("number").value) : num = 1
 
-    const currentSong = queue.currentTrack
-    embed = new Discord.EmbedBuilder()
+    currentSong = queue.currentTrack
     if(queue.tracks.data.length == 0) queue.delete()
     else queue.node.skipTo(num-1)
+
+    embed = new Discord.EmbedBuilder()
 
     if(num == 1){
       embed

@@ -24,7 +24,7 @@ module.exports = {
     msg = ""
 
     for(id of args.get("ids").value.split(' ')){
-      if(id.startsWith("u")) res = "https://www.pixiv.net/en/users/"+id.split("u")[1]+"\n"
+      if(id.startsWith("u")) res = "https://www.pixiv.net/en/users/"+id.split("u")[1]+"/illustrations \n"
       else res = "https://www.pixiv.net/en/artworks/"+id+"\n"
 
       if(res.length + msg.length >= 2000){

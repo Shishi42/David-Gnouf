@@ -148,6 +148,7 @@ module.exports = {
         { name: `:star: ${skill3.dataValues.subskill_nom}`, value: `${rating(skill3_score)}`},
         { name: `:star: ${skill4.dataValues.subskill_nom}`, value: `${rating(skill4_score)}`},
         { name: `:star: ${skill5.dataValues.subskill_nom}`, value: `${rating(skill5_score)}`},
+        { name: '\u200B', value: '\u200B' },
         { name: `:trophy: SCORE TOTAL :trophy:`, value: `**${total_score} :arrow_right: ${["TRASH","TRASH","TRASH","TRASH","TRASH","TRASH","VERY BAD","VERY BAD","VERY BAD","BAD","BAD","BAD","MEH","MEH","MEH","GOOD","GOOD","GOOD","VERY GOOD","VERY GOOD","VERY GOOD","GOD","GOD","GOD","GOD","GOD","GOD"][parseInt(total_score)+13]}**`},
     	)
       .setTimestamp()

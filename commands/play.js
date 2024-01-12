@@ -33,7 +33,7 @@ module.exports = {
       return (url.protocol === "http:" || url.protocol === "https:") && (string.includes("youtube.com") || string.includes("youtu.be"))
     }
 
-    await message.deferReply()
+    await message.deferReply({ephemeral: true})
     const player = useMainPlayer()
 
     shuffle = false

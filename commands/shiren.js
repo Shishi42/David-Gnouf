@@ -53,12 +53,12 @@ module.exports = {
 
     if(min >= max) return message.reply({content: "The minimum time should be inferior to the maximum time you provided.", ephemeral: true})
 
-    await message.reply({content: `You will be notified between ${min} and ${max} minutes`+dice ? `, with a d${dice} roll` : '' + '.', ephemeral: true})
+    await message.reply({content: `You will be notified between ${min} and ${max} minutes${dice ? `, with a d${dice} roll` : ''}.`, ephemeral: true})
 
     if(dice) dice_roll = Math.floor(Math.random() * parseInt(dice))
 
     await sleep((Math.floor(Math.random() * (max*60 - min*60)) + min*60)*1000)
 
-    return await message.member.send(`Wake the fuck up, ~~samurai~~ ${message.user}`+dice ? `, you rolled a ${dice_roll}` : '' +'.')
+    return await message.member.send(`Wake the fuck up, ~~samurai~~ ${message.user}${dice ? `, you rolled a ${dice_roll}` : ''}.`)
   }
 }

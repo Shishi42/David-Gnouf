@@ -4,7 +4,7 @@ const { QueryType, useMainPlayer } = require("discord-player")
 module.exports = {
 
   name: "play",
-  description: "Play a song from YouTube on your voice channel",
+  description: "Play a song from link on your voice channel",
   permission: null,
   dm: false,
   category: "Music",

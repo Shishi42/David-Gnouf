@@ -3,12 +3,16 @@
   "version": "3.0.0",
   "description": "Discord Utility BOT",
   "main": "david.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shishi42/David-Gnouf.git"
+  },
   "keywords": [
     "discord",
     "bot",
-    "Utility"
+    "utility"
   ],
-  "author": "Shishi",
+  "author": "Shishi42",
   "license": "MIT",
   "dependencies": {
     "@discord-player/extractor": "^4.4.4",

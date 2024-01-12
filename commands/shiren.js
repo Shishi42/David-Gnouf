@@ -32,46 +32,33 @@ module.exports = {
   ],
 
   async run(bot, message, args) {
-    min = args.get("min").value
-    max = args.get("max").value
-    dices = ["d2","d4","d6","d8","d10","d12","d20","d100"]
-
-    dice = ""
-    if(args.get("dice")){
-      if(dices.includes(args.get("dice").value)) dice = args.get("dice").value.substring(1)
-      else return message.reply({content: "The dice you provided is invalid.", ephemeral: true})
-    }
-
-    if(isNaN(min)) return message.reply({content: "The minimum time you provided is invalid.", ephemeral: true})
-    if(isNaN(max)) return message.reply({content: "The maximum time you provided is invalid.", ephemeral: true})
-
-
-    min = parseInt(min)
-    max = parseInt(max)
-
-    if(parseInt(min) >= parseInt(max)) return message.reply({content: "The minimum time should be inferior to the maximum time you provided.", ephemeral: true})
-
-    res = `You will be notified between ${min} and ${max} minutes`
-    if(dice) res += `, with a d${dice} roll.`
-    else res += "."
-
-    await message.reply({content: res, ephemeral: true})
-
-
-    diff = max*60 - min*60
-    rand_time = Math.floor(Math.random() * diff) + min*60
-    if(dice) dice_roll = Math.floor(Math.random() * parseInt(dice))
-
-    await sleep(rand_time*1000)
-
-    res = `Wake the fuck up, ~~samurai~~ ${message.user}`
-    if(dice) res += `, you rolled a ${dice_roll}`
-    res += "."
-
-    await message.member.send(res)
 
     function sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms))
     }
+    
+    min = args.get("min").value
+    max = args.get("max").value
+    dice = ""
+    
+    if(args.get("dice")){
+      if(["d2","d4","d6","d8","d10","d12","d20","d100"].includes(args.get("dice").value)) dice = args.get("dice").value.substring(1)
+      else return message.reply({content: "The dice you provided is invalid.", ephemeral: true})
+    }
+
+    if(isNaN(min) || isNaN(max)) return message.reply({content: "The times you provided are invalid.", ephemeral: true})
+
+    min = parseInt(min)
+    max = parseInt(max)
+
+    if(min >= max) return message.reply({content: "The minimum time should be inferior to the maximum time you provided.", ephemeral: true})
+
+    await message.reply({content: `You will be notified between ${min} and ${max} minutes`+dice ? `, with a d${dice} roll` : '' + '.', ephemeral: true})
+
+    if(dice) dice_roll = Math.floor(Math.random() * parseInt(dice))
+
+    await sleep((Math.floor(Math.random() * (max*60 - min*60)) + min*60)*1000)
+
+    return await message.member.send(`Wake the fuck up, ~~samurai~~ ${message.user}`+dice ? `, you rolled a ${dice_roll}` : '' +'.')
   }
 }

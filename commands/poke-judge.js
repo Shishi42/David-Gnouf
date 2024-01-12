@@ -61,6 +61,47 @@ module.exports = {
 
   async run(bot, message, args) {
 
+    function rating(string){
+      return ["TRASH","BAD","WEAK","OKAY","GOOD","GREAT","GOD"][parseInt(string)+3]
+    }
+
+    async function check_args(bot, args){
+      error = ""
+      choices = []
+      pokemons = await bot.Pokemons.findAll({attributes: ["pokemon_nom", "pokemon_name", "pokemon_id"]})
+      for(pokemon of pokemons){
+        choices.push(`${pokemon.dataValues.pokemon_nom} (${pokemon.dataValues.pokemon_name})`)
+        choices.push(pokemon.dataValues.pokemon_nom)
+        choices.push(pokemon.dataValues.pokemon_name)
+        choices.push(parseInt(pokemon.dataValues.pokemon_id)+1)
+      }
+      if(!choices.includes(args.get("pokémon").value)) error += "The Pokémon you provided is invalid.\n"
+
+      choices = []
+      natures = await bot.Natures.findAll({attributes: ["nature_nom", "nature_name", "nature_incr_en", "nature_decr_en"]})
+      for(nature of natures){
+        choices.push(`${nature.dataValues.nature_nom} (${nature.dataValues.nature_name})`)
+        choices.push(nature.dataValues.nature_nom)
+        choices.push(nature.dataValues.nature_name)
+      }
+      if(!choices.includes(args.get("nature").value)) error += "The nature you provided is invalid.\n"
+
+      choices = []
+      subskills = await bot.Subskills.findAll({attributes: ["subskill_nom", "subskill_name"]})
+      for(subskill of subskills){
+        choices.push(`${subskill.dataValues.subskill_nom} (${subskill.dataValues.subskill_name})`)
+        choices.push(subskill.dataValues.subskill_nom)
+        choices.push(subskill.dataValues.subskill_name)
+      }
+      if(!choices.includes(args.get("sub-skill1").value)) error += "The 1st sub-skill (lvl10) you provided is invalid.\n"
+      if(!choices.includes(args.get("sub-skill2").value)) error += "The 2nd sub-skill (lvl25) you provided is invalid.\n"
+      if(!choices.includes(args.get("sub-skill3").value)) error += "The 3rd sub-skill (lvl50) you provided is invalid.\n"
+      if(!choices.includes(args.get("sub-skill4").value)) error += "The 4th sub-skill (lvl75) you provided is invalid.\n"
+      if(!choices.includes(args.get("sub-skill5").value)) error += "The 5th sub-skill (lvl100) you provided is invalid.\n"
+
+      return error
+    }
+
     error = await check_args(bot, args)
     if(error) return message.reply({content: error, ephemeral: true})
 
@@ -107,58 +148,11 @@ module.exports = {
         { name: `:star: ${skill3.dataValues.subskill_nom}`, value: `${rating(skill3_score)}`},
         { name: `:star: ${skill4.dataValues.subskill_nom}`, value: `${rating(skill4_score)}`},
         { name: `:star: ${skill5.dataValues.subskill_nom}`, value: `${rating(skill5_score)}`},
-        { name: '\u200B', value: '\u200B' },
-        { name: `:trophy: SCORE TOTAL :trophy:`, value: `**${total_score} :arrow_right: ${total_rating(total_score)}**`},
+        { name: `:trophy: SCORE TOTAL :trophy:`, value: `**${total_score} :arrow_right: ${["TRASH","TRASH","TRASH","TRASH","TRASH","TRASH","VERY BAD","VERY BAD","VERY BAD","BAD","BAD","BAD","MEH","MEH","MEH","GOOD","GOOD","GOOD","VERY GOOD","VERY GOOD","VERY GOOD","GOD","GOD","GOD","GOD","GOD","GOD"][parseInt(total_score)+13]}**`},
     	)
       .setTimestamp()
       .setFooter({text: `Requested by ${message.user.username}`, iconURL: `${message.user.displayAvatarURL({dynamic: true})}`})
 
-    await message.reply({embeds: [embed]})
-
-    function rating(string){
-      return ["TRASH","BAD","WEAK","OKAY","GOOD","GREAT","GOD"][parseInt(string)+3]
-    }
-
-    function total_rating(string){
-      return ["TRASH","TRASH","TRASH","TRASH","TRASH","TRASH","VERY BAD","VERY BAD","VERY BAD","BAD","BAD","BAD","MEH","MEH","MEH","GOOD","GOOD","GOOD","VERY GOOD","VERY GOOD","VERY GOOD","GOD","GOD","GOD","GOD","GOD","GOD"][parseInt(string)+13]
-    }
-
-
-    async function check_args(bot, args){
-      error = ""
-      choices = []
-      pokemons = await bot.Pokemons.findAll({attributes: ["pokemon_nom", "pokemon_name", "pokemon_id"]})
-      for(pokemon of pokemons){
-        choices.push(`${pokemon.dataValues.pokemon_nom} (${pokemon.dataValues.pokemon_name})`)
-        choices.push(pokemon.dataValues.pokemon_nom)
-        choices.push(pokemon.dataValues.pokemon_name)
-        choices.push(parseInt(pokemon.dataValues.pokemon_id)+1)
-      }
-      if(!choices.includes(args.get("pokémon").value)) error += "The Pokémon you provided is invalid.\n"
-
-      choices = []
-      natures = await bot.Natures.findAll({attributes: ["nature_nom", "nature_name", "nature_incr_en", "nature_decr_en"]})
-      for(nature of natures){
-        choices.push(`${nature.dataValues.nature_nom} (${nature.dataValues.nature_name})`)
-        choices.push(nature.dataValues.nature_nom)
-        choices.push(nature.dataValues.nature_name)
-      }
-      if(!choices.includes(args.get("nature").value)) error += "The nature you provided is invalid.\n"
-
-      choices = []
-      subskills = await bot.Subskills.findAll({attributes: ["subskill_nom", "subskill_name"]})
-      for(subskill of subskills){
-        choices.push(`${subskill.dataValues.subskill_nom} (${subskill.dataValues.subskill_name})`)
-        choices.push(subskill.dataValues.subskill_nom)
-        choices.push(subskill.dataValues.subskill_name)
-      }
-      if(!choices.includes(args.get("sub-skill1").value)) error += "The 1st sub-skill (lvl10) you provided is invalid.\n"
-      if(!choices.includes(args.get("sub-skill2").value)) error += "The 2nd sub-skill (lvl25) you provided is invalid.\n"
-      if(!choices.includes(args.get("sub-skill3").value)) error += "The 3rd sub-skill (lvl50) you provided is invalid.\n"
-      if(!choices.includes(args.get("sub-skill4").value)) error += "The 4th sub-skill (lvl75) you provided is invalid.\n"
-      if(!choices.includes(args.get("sub-skill5").value)) error += "The 5th sub-skill (lvl100) you provided is invalid.\n"
-
-      return error
-    }
+    return await message.reply({embeds: [embed]})
   }
 }

@@ -27,6 +27,12 @@ module.exports = {
 
   async run(bot, message, args) {
 
+    function checkLink(string){
+      let url
+      try { url = new URL(string) } catch (_) { return false }
+      return (url.protocol === "http:" || url.protocol === "https:") && (string.includes("youtube.com") || string.includes("youtu.be"))
+    }
+
     await message.deferReply()
     const player = useMainPlayer()
 
@@ -49,14 +55,12 @@ module.exports = {
     }
     else if (!checkLink(url)) return message.editReply({content: "URL provided is invalid.", ephemeral: true})
 
-    if ((args.source != "dj" && args.get("shuffle") && args.get("shuffle").value.toLowerCase() == "yes")) shuffle = true
+    if ((args.source != "dj" && args.get("shuffle")?.value.toLowerCase() == "yes")) shuffle = true
 
     const searchResult = await player.search(url, { requestedBy: message.user })
 
-    if (!searchResult.hasTracks()) {
-      await message.editReply({content: "Could not find something at this URL.", ephemeral: true})
-      return
-    } else {
+    if (!searchResult.hasTracks()) return await message.editReply({content: "Could not find something at this URL.", ephemeral: true})
+    else {
       try {
         if(shuffle) searchResult.tracks = searchResult.tracks.sort(() => Math.random() - 0.5)
         await player.play(channel, searchResult, { nodeOptions: { metadata: message }})
@@ -70,14 +74,13 @@ module.exports = {
           .setColor(bot.color)
           .setTimestamp()
           .setFooter({text: `Requested by ${searchResult.requestedBy.username}`, iconURL: `${searchResult.requestedBy.displayAvatarURL({dynamic: true})}`})
-        if(searchResult.hasPlaylist()){
 
+        if(searchResult.hasPlaylist()){
           embed
             .addFields({name: "Description", value: `${searchResult.playlist.description}`})
             .addFields({name: "Duration", value: `${searchResult.tracks.length} songs`})
             .setThumbnail(searchResult.playlist.thumbnail)
-          if(shuffle) embed.setDescription(`**${searchResult.playlist.title}** has been added as a **shuffled playlist** to the Queue`)
-          else embed.setDescription(`**${searchResult.playlist.title}** has been added as a **playlist** to the Queue`)
+            .setDescription(`**${searchResult.playlist.title}** has been added as a **${shuffle ? "shuffled" : ""} playlist** to the Queue`)
         } else {
           embed
             .setDescription(`**${searchResult.tracks[0].title}** has been added to the Queue`)
@@ -92,10 +95,5 @@ module.exports = {
       }
     }
 
-    function checkLink(string){
-      let url
-      try { url = new URL(string) } catch (_) { return false }
-      return (url.protocol === "http:" || url.protocol === "https:") && (string.includes("youtube.com") || string.includes("youtu.be"))
-    }
   }
 }

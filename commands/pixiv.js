@@ -3,7 +3,7 @@ const Discord = require("discord.js")
 module.exports = {
 
   name: "pixiv",
-  description: "Send pixiv artwork or user link with your ids",
+  description: "Send pixiv links from ids",
   permission: null,
   dm: true,
   category: "Utility",
@@ -34,6 +34,6 @@ module.exports = {
       msg += res
     }
 
-    await message.followUp(msg)
+    return await message.followUp(msg)
   }
 }

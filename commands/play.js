@@ -30,7 +30,7 @@ module.exports = {
     function checkLink(string){
       let url
       try { url = new URL(string) } catch (_) { return false }
-      return (url.protocol === "http:" || url.protocol === "https:") && (string.includes("youtube.com") || string.includes("youtu.be"))
+      return (url.protocol === "http:" || url.protocol === "https:")
     }
 
     await message.deferReply({ephemeral: true})

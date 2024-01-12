@@ -44,8 +44,8 @@ module.exports = {
       })
 
     } else {
-      embed.setTitle(`${command.name} Help Menu`)
-      embed.setDescription(`Name : \`${command.name}\` \nDescription : \`${command.description}\` \nRequired permissions : \`${typeof command.permission !== "bigint" ? command.permission !== null ? command.permission : "Any" : new Discord.PermissionsBitField(command.permission).toArray(false)}\` \nCommand in DM : \`${command.dm ? "Yes" : "No"}\` \nCategory : \`${command.category}\``)
+      embed.setTitle(`${command.name}`)
+      embed.setDescription(`Description : \`${command.description}\` \nRequired permissions : \`${typeof command.permission !== "bigint" ? command.permission !== null ? command.permission : "Any" : new Discord.PermissionsBitField(command.permission).toArray(false)}\` \nCommand in DM : \`${command.dm ? "Yes" : "No"}\` \nCategory : \`${command.category}\``)
     }
     return await message.reply({embeds: [embed]})
   }

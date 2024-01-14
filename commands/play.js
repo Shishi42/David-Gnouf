@@ -33,7 +33,7 @@ module.exports = {
       return (url.protocol === "http:" || url.protocol === "https:")
     }
 
-    await message.deferReply({ephemeral: true})
+    await message.deferReply({ephemeral: args?.source == "dj"})
     const player = useMainPlayer()
 
     shuffle = false
@@ -88,7 +88,7 @@ module.exports = {
             .addFields({name: "Duration", value: `${searchResult.tracks[0].duration}`})
             .setThumbnail(searchResult.tracks[0].thumbnail)
         }
-        if(args.source != "dj") await message.editReply({ embeds: [embed], ephemeral: false })
+        if(args.source != "dj") await message.editReply({ embeds: [embed] )
         else await message.deleteReply()
       } catch (e) {
           return message.followUp(`Something went wrong: ${e}`)

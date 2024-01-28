@@ -118,7 +118,15 @@ module.exports = {
     skill_data = [[2,1,2],[0,0,0],[1,1,1],[-2,1,0],[-2,2,1],[-1,0,-1],[0,1,0],[1,2,1],[0,0,1],[1,1,2],[0,0,1],[1,1,2],[-1,-1,-1],[0,0,0],[2,2,2],[-1,-1,-1],[0,0,0],[0,0,0],[0,0,0]]
     tier_emoji = { 'S' : "<:S_:1180174991732519095>", 'A' : "<:A_:1180174993519288442>", 'B' : "<:B_:1180174995889066044>", 'C' : "<:C_:1180174997122191441>",'D' : "<:D_:1180174999869472859>", 'E' : "<:E_:1180175001085812796>", 'F' : "<:F_:1180175004894232698>", '+' : '+', '-' : '-', '?' : ":question:" }
 
+    
+    
+    console.log(nature_data[parseInt(pokemon.dataValues.type_id)])
+    console.log(nature_data[parseInt(pokemon.dataValues.type_id)][stats_data.indexOf(nature.dataValues.nature_incr_en) != -1 ? stats_data.indexOf(nature.dataValues.nature_incr_en) : nature_data.length])
+    console.log(nature_data[parseInt(pokemon.dataValues.type_id)][stats_data.indexOf(nature.dataValues.nature_decr_en) != -1 ? stats_data.indexOf(nature.dataValues.nature_decr_en) : nature_data.length])
+
     nature_score = nature_data[parseInt(pokemon.dataValues.type_id)][stats_data.indexOf(nature.dataValues.nature_incr_en) != -1 ? stats_data.indexOf(nature.dataValues.nature_incr_en) : nature_data.length] - nature_data[parseInt(pokemon.dataValues.type_id)][stats_data.indexOf(nature.dataValues.nature_decr_en) != -1 ? stats_data.indexOf(nature.dataValues.nature_decr_en) : nature_data.length]
+    console.log(nature_score)
+
     skill1_score = skill_data[parseInt(skill1.dataValues.subskill_id)][parseInt(pokemon.dataValues.type_id)]
     skill2_score = skill_data[parseInt(skill2.dataValues.subskill_id)][parseInt(pokemon.dataValues.type_id)]
     skill3_score = skill_data[parseInt(skill3.dataValues.subskill_id)][parseInt(pokemon.dataValues.type_id)]

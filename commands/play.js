@@ -12,7 +12,7 @@ module.exports = {
     {
       type: "string",
       name: "url",
-      description: "Link to a YouTube video or playlist",
+      description: "Link to a link video or playlist",
       required: true,
       autocomplete: true,
     },

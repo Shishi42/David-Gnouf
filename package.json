@@ -17,11 +17,13 @@
   "dependencies": {
     "@discord-player/extractor": "^4.4.4",
     "@discordjs/voice": "^0.14.0",
+    "@distube/ytdl-core": "^4.13.3",
     "cron": "^2.2.0",
     "discord-player": "^6.6.4",
     "discord.js": "^14.8.0",
     "jsonfile": "^6.1.0",
     "mediaplex": "^0.0.9",
+    "play-dl": "^1.9.7",
     "sequelize": "^6.35.1",
     "sqlite3": "^5.1.6",
     "tweetnacl": "^1.0.3",

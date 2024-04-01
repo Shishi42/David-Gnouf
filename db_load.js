@@ -18,6 +18,7 @@ module.exports = {
       ["Metronome","Métronome","0","0"],
       ["Extra Helpful S","Soutien Extra S","-1","-1"],
       ["Extra Tasty S","Plat Super Bon S","0","0"],
+      ["Helper Boost (Electric)","Super Soutien (Électrik)","0","0"],
     ]
 
     subskills = [
@@ -205,9 +206,10 @@ module.exports = {
       ["Nounourson","Ingrédients","Charge de Puissance S - Var","?"],
       ["Chelours","Ingrédients","Charge de Puissance S - Var","?"],
       ["Dedenne","Compétences","Plat Super Bon S","?"],
+      ["Raikou","Compétences","Super Soutien (Électrik)","?"],
     ]
 
-    pokemon_english = ["Bulbasaur","Ivysaur","Venusaur","Charmander","Charmeleon","Charizard","Squirtle","Wartortle","Blastoise","Caterpie","Metapod","Butterfree","Rattata","Raticate","Ekans","Arbok","Pichu","Pikachu","Raichu","Cleffa","Clefairy","Clefable","Igglybuff","Jigglypuff","Wigglytuff","Diglett","Dugtrio","Meowth","Persian","Psyduck","Golduck","Mankey","Primeape","Growlithe","Arcanine","Bellsprout","Weepinbell","Victreebel","Geodude","Graveler","Golem","Slowpoke","Slowbro","Slowking","Magnemite","Magneton","Magnezone","Doduo","Dodrio","Gastly","Haunter","Gengar","Onix","Steelix","Cubone","Marowak","Kangaskhan","Mime Jr.","Mr. Mime","Pinsir","Ditto","Eevee","Vaporeon","Jolteon","Flareon","Espeon","Umbreon","Leafeon","Glaceon","Sylveon","Chikorita","Bayleef","Meganium","Cyndaquil","Quilava","Typhlosion","Totodile","Croconaw","Feraligatr","Togepi","Togetic","Togekiss","Mareep","Flaaffy","Ampharos","Bonsly","Sudowoodo","Wynaut","Wobbuffet","Heracross","Houndour","Houndoom","Larvitar","Pupitar","Tyranitar","Slakoth","Vigoroth","Slaking","Sableye","Gulpin","Swalot","Swablu","Altaria","Shuppet","Banette","Absol","Spheal","Sealeo","Walrein","Riolu","Lucario","Croagunk","Toxicroak","Pikachu - Halloween","Pikachu - Christmas","Delibird","Snover","Abomasnow","Dratini","Dragonair","Dragonite","Ralts","Kirlia","Gardevoir","Gallade","Stufful","Bewear","Dedenne"]
+    pokemon_english = ["Bulbasaur","Ivysaur","Venusaur","Charmander","Charmeleon","Charizard","Squirtle","Wartortle","Blastoise","Caterpie","Metapod","Butterfree","Rattata","Raticate","Ekans","Arbok","Pichu","Pikachu","Raichu","Cleffa","Clefairy","Clefable","Igglybuff","Jigglypuff","Wigglytuff","Diglett","Dugtrio","Meowth","Persian","Psyduck","Golduck","Mankey","Primeape","Growlithe","Arcanine","Bellsprout","Weepinbell","Victreebel","Geodude","Graveler","Golem","Slowpoke","Slowbro","Slowking","Magnemite","Magneton","Magnezone","Doduo","Dodrio","Gastly","Haunter","Gengar","Onix","Steelix","Cubone","Marowak","Kangaskhan","Mime Jr.","Mr. Mime","Pinsir","Ditto","Eevee","Vaporeon","Jolteon","Flareon","Espeon","Umbreon","Leafeon","Glaceon","Sylveon","Chikorita","Bayleef","Meganium","Cyndaquil","Quilava","Typhlosion","Totodile","Croconaw","Feraligatr","Togepi","Togetic","Togekiss","Mareep","Flaaffy","Ampharos","Bonsly","Sudowoodo","Wynaut","Wobbuffet","Heracross","Houndour","Houndoom","Larvitar","Pupitar","Tyranitar","Slakoth","Vigoroth","Slaking","Sableye","Gulpin","Swalot","Swablu","Altaria","Shuppet","Banette","Absol","Spheal","Sealeo","Walrein","Riolu","Lucario","Croagunk","Toxicroak","Pikachu - Halloween","Pikachu - Christmas","Delibird","Snover","Abomasnow","Dratini","Dragonair","Dragonite","Ralts","Kirlia","Gardevoir","Gallade","Stufful","Bewear","Dedenne", "Raikou"]
 
     skills.forEach((skill, i) => {
       bot.Skills.create({

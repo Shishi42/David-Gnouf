@@ -23,7 +23,7 @@ module.exports = {
    
     message.channel.messages.fetch(args.get("id").value)
       .then(function(msg){
-        msg.react("<:check:334046325098414080>")
+        msg.react("✔️")
         msg.react("❔")
         msg.react("❌")})
       .catch((error) => {return message.editReply({content: "Message with this id not found.", ephemeral: true})})

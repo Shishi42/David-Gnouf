@@ -25,6 +25,6 @@
     "sequelize": "^6.35.1",
     "sqlite3": "^5.1.6",
     "tweetnacl": "^1.0.3",
-    "youtube-ext": "^1.1.25"
+    "youtube-ext": "^1.1.16"
   }
 }

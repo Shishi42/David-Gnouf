@@ -29,9 +29,9 @@ new cron.CronJob('00 00 00 * * *', () => {
 }).start()
 
 bot.owner = config.bot_owner
-new cron.CronJob('00 22 * * * *', () => { bot.users.fetch(bot.owner).then(user => user.send("$mx disponible")) }).start()
-new cron.CronJob('00 22 2-5-8-11-14-17-20-23 * * *', () => { bot.users.fetch(bot.owner).then(user => user.send("claim disponible")) }).start()
-new cron.CronJob('00 00 00-02-04-06-08-10-12-14-16-18-20-22 * * *', () => { bot.users.fetch(bot.owner).then(user => user.send("$p disponible"))}).start()
-new cron.CronJob('00 00 00 * * *', () => { bot.users.fetch(bot.owner).then(user => user.send("$dk et $daily disponible")) }).start()
+new cron.CronJob('22 * * * *', () => { bot.users.fetch(bot.owner).then(user => user.send("$mx disponible")) }).start()
+new cron.CronJob('22 2,5,8,11,14,17,20,23 * * *', () => { bot.users.fetch(bot.owner).then(user => user.send("claim disponible")) }).start()
+new cron.CronJob('0 */2 * * *', () => { bot.users.fetch(bot.owner).then(user => user.send("$p disponible"))}).start()
+new cron.CronJob('0 0 * * *', () => { bot.users.fetch(bot.owner).then(user => user.send("$dk et $daily disponible")) }).start()
 
 bot.login(config.token)
